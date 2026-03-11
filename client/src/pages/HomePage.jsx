@@ -9,6 +9,7 @@ import HowItWorks from '../components/ui/HowItWorks';
 import Testimonials from '../components/ui/Testimonials';
 import FAQ from '../components/ui/FAQ';
 import CTASection from '../components/ui/CTASection';
+import BrandLogo from '../components/ui/BrandLogo';
 
 const STATS = [
   { icon: Clock, value: '< 60s', label: 'To Right Specialist', color: 'text-emerald' },
@@ -163,6 +164,17 @@ export default function HomePage() {
           style={{ opacity: heroOpacity }}
           className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-5rem)] px-4 py-16 pt-24"
         >
+          <motion.div
+            initial={{ opacity: 0, y: -24, scale: 0.92 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.9, type: 'spring', bounce: 0.35 }}
+            className="mb-5"
+          >
+            <div className="rounded-3xl border border-emerald-400/15 bg-[#0A140F]/30 px-4 py-3 backdrop-blur-md">
+              <BrandLogo size="lg" theme="dark" showTagline />
+            </div>
+          </motion.div>
+
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20, scale: 0.8 }}

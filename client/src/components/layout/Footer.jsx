@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Activity, Heart, Github, Mail, Shield } from 'lucide-react';
+import BrandLogo from '../ui/BrandLogo';
 
 export default function Footer() {
   return (
@@ -9,13 +10,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
             {/* Brand */}
             <div className="flex items-center gap-3">
-              <img src="/logo.svg" alt="CarePath Logo" className="w-10 h-10 object-contain drop-shadow-md" />
-              <div>
-                <span className="text-white font-bold text-sm">
-                  Care<span className="text-emerald-400">Path</span>
-                </span>
-                <p className="text-emerald-300/50 text-[10px]">Find the right doctor. Right now.</p>
-              </div>
+              <BrandLogo size="md" theme="dark" showTagline />
             </div>
 
             {/* Disclaimer */}

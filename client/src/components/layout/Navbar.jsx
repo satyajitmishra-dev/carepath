@@ -7,6 +7,7 @@ import { clearSymptoms } from '../../features/symptoms/symptomsSlice';
 import { clearClinics } from '../../features/map/mapSlice';
 import { logoutUser } from '../../features/auth/authSlice';
 import TranslateWidget from '../ui/TranslateWidget';
+import BrandLogo from '../ui/BrandLogo';
 
 export default function Navbar({ onNavigate, currentPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,20 +48,12 @@ export default function Navbar({ onNavigate, currentPage }) {
             className="flex items-center gap-2.5 cursor-pointer bg-transparent border-none"
           >
             <div className="relative flex items-center justify-center">
-              <img src="/logo.svg" alt="CarePath Logo" className="w-10 h-10 object-contain drop-shadow-[0_0_12px_rgba(80,200,120,0.4)]" />
+              <BrandLogo size="md" theme="dark" showTagline />
               <motion.div
                 className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full"
                 animate={{ scale: [1, 1.3, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-white font-bold text-lg leading-tight tracking-tight">
-                Care<span className="text-emerald-400">Path</span>
-              </span>
-              <span className="text-emerald-300/60 text-[10px] font-medium tracking-widest uppercase">
-                AI Health Navigator
-              </span>
             </div>
           </motion.button>
 
