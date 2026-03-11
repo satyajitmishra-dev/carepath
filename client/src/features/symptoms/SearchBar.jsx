@@ -23,6 +23,7 @@ export default function SearchBar() {
   const dispatch = useDispatch();
   const { symptomText, symptomChips, error } = useSelector((state) => state.symptoms);
   const { isLoading } = useSelector((state) => state.analysis);
+  const { isAuthenticated, guestConsultations } = useSelector((state) => state.auth);
   const { detectLocation } = useGeolocation();
   const inputRef = useRef(null);
   const submitLockRef = useRef(false);
@@ -69,6 +70,21 @@ export default function SearchBar() {
       dispatch(setError(validation.error));
       toast.error(validation.error);
       return;
+    }
+
+    // Guest consultation limit: 1 free analysis, then require login
+    if (!isAuthenticated) {
+      if (guestConsultations >= 1) {
+        toast('Create a free account to continue your healthcare journey 🌿', {
+          icon: '✨',
+          duration: 4000,
+          style: { background: '#0A140F', color: '#E8F8F2', border: '1px solid rgba(80, 200, 120, 0.2)' }
+        });
+        dispatch(incrementGuestConsultation());
+        return;
+      } else {
+        dispatch(incrementGuestConsultation());
+      }
     }
 
     // Parse final chips

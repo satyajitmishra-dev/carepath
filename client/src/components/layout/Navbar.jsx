@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { clearResults } from '../../features/analysis/analysisSlice';
 import { clearSymptoms } from '../../features/symptoms/symptomsSlice';
 import { clearClinics } from '../../features/map/mapSlice';
+import { logoutUser } from '../../features/auth/authSlice';
 import TranslateWidget from '../ui/TranslateWidget';
 
 export default function Navbar({ onNavigate, currentPage }) {
@@ -163,6 +164,24 @@ export default function Navbar({ onNavigate, currentPage }) {
             <div className="flex flex-col gap-2">
               <MobileLink onClick={() => handleNavClick('home')}>Home</MobileLink>
               <MobileLink onClick={() => handleNavClick('about')}>About</MobileLink>
+              <div className="h-px bg-emerald-500/10 my-1" />
+              {isAuthenticated ? (
+                <>
+                  <div className="flex items-center gap-2 px-3 py-2">
+                    {user?.photoURL ? (
+                      <img src={user.photoURL} alt="Profile" className="w-6 h-6 rounded-full" />
+                    ) : (
+                      <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-xs font-bold text-emerald-300">
+                        {user?.displayName?.charAt(0) || 'U'}
+                      </div>
+                    )}
+                    <span className="text-emerald-100/80 text-sm font-medium">{user?.displayName?.split(' ')[0] || 'User'}</span>
+                  </div>
+                  <MobileLink onClick={() => { dispatch(logoutUser()); setMenuOpen(false); }}>Sign Out</MobileLink>
+                </>
+              ) : (
+                <MobileLink onClick={() => { onNavigate?.('login'); setMenuOpen(false); }}>Log In</MobileLink>
+              )}
             </div>
           </motion.div>
         )}
