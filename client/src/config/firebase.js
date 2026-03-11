@@ -10,11 +10,30 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+const requiredConfigKeys = Object.keys(firebaseConfig);
+const missingKeys = requiredConfigKeys.filter((key) => !firebaseConfig[key]);
 
-// Optional: Force account selection even if already signed in
-googleProvider.setCustomParameters({
-  prompt: 'select_account'
-});
+export const isFirebaseConfigured = missingKeys.length === 0;
+
+if (!isFirebaseConfigured) {
+  console.error(
+    `[Firebase] Missing config keys: ${missingKeys.join(', ')}. ` +
+    'Set VITE_FIREBASE_* variables in your environment (e.g., Vercel Project Settings -> Environment Variables).'
+  );
+}
+
+let app = null;
+let auth = null;
+let googleProvider = null;
+
+if (isFirebaseConfigured) {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  googleProvider = new GoogleAuthProvider();
+
+  googleProvider.setCustomParameters({
+    prompt: 'select_account'
+  });
+}
+
+export { app, auth, googleProvider };

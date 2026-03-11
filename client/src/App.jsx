@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
-import { auth } from './config/firebase';
+import { auth, isFirebaseConfigured } from './config/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { setUser, setAuthLoading } from './features/auth/authSlice';
 import Layout from './components/layout/Layout';
@@ -31,6 +31,11 @@ export default function App() {
 
   // Global Auth Listener
   useEffect(() => {
+    if (!isFirebaseConfigured || !auth) {
+      dispatch(setAuthLoading(false));
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         dispatch(setUser({

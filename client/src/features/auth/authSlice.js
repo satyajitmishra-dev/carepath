@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { auth, googleProvider } from '../../config/firebase';
+import { auth, googleProvider, isFirebaseConfigured } from '../../config/firebase';
 import { signInWithPopup, signOut } from 'firebase/auth';
 import api from '../../services/api';
 import toast from 'react-hot-toast';
@@ -17,6 +17,12 @@ export const loginWithGoogle = createAsyncThunk(
   'auth/loginWithGoogle',
   async (_, { rejectWithValue }) => {
     try {
+      if (!isFirebaseConfigured || !auth || !googleProvider) {
+        const message = 'Firebase is not configured for this deployment. Please set VITE_FIREBASE_* environment variables.';
+        toast.error(message);
+        return rejectWithValue(message);
+      }
+
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
       const idToken = await user.getIdToken();
@@ -50,6 +56,10 @@ export const logoutUser = createAsyncThunk(
   'auth/logoutUser',
   async (_, { rejectWithValue }) => {
     try {
+      if (!auth) {
+        return null;
+      }
+
       await signOut(auth);
       return null;
     } catch (error) {
