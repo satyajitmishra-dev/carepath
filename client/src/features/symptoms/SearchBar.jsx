@@ -82,6 +82,8 @@ export default function SearchBar() {
 
     try {
       await dispatch(analyzeSymptoms(currentText)).unwrap();
+    } catch (err) {
+      toast.error(err || 'Failed to connect to the analysis engine');
     } finally {
       submitLockRef.current = false;
     }

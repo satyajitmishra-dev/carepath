@@ -5,7 +5,7 @@ export const analyzeSymptoms = createAsyncThunk(
   'analysis/analyze',
   async (symptomText, { rejectWithValue }) => {
     try {
-      const response = await api.post('/api/analyze', { symptoms: symptomText });
+      const response = await api.post('/analyze', { symptoms: symptomText });
       return response.data;
     } catch (error) {
       return rejectWithValue(

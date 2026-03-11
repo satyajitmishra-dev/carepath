@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import Groq from 'groq-sdk';
 
 const RESPONSE_CACHE_TTL_MS = 5 * 60 * 1000;
 const analysisCache = new Map();
@@ -59,10 +59,10 @@ export async function analyzeSymptoms(req, res) {
       });
     }
 
-    if (!process.env.GEMINI_API_KEY) {
+    if (!process.env.GROQ_API_KEY) {
       return res.status(500).json({
         success: false,
-        message: 'API key not configured. Please set GEMINI_API_KEY in .env file.',
+        message: 'API key not configured. Please set GROQ_API_KEY in .env file.',
       });
     }
 
@@ -73,24 +73,23 @@ export async function analyzeSymptoms(req, res) {
       return res.json(cachedResponse);
     }
 
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({
-      model: 'gemini-2.0-flash',
-      generationConfig: {
-        responseMimeType: 'application/json',
-        temperature: 0.3,
-        maxOutputTokens: 1000,
-      },
-    });
-
-    const prompt = `${SYSTEM_PROMPT}\n\nUser symptoms: ${symptoms.trim()}`;
+    const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
     let result;
     const maxAttempts = 2;
 
     for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
       try {
-        result = await model.generateContent(prompt);
+        result = await groq.chat.completions.create({
+          messages: [
+            { role: 'system', content: SYSTEM_PROMPT },
+            { role: 'user', content: `User symptoms: ${symptoms.trim()}` }
+          ],
+          model: 'llama-3.1-8b-instant',
+          temperature: 0.3,
+          max_completion_tokens: 1000,
+          response_format: { type: 'json_object' },
+        });
         break;
       } catch (generationError) {
         const isRateLimited = generationError?.status === 429;
@@ -104,7 +103,7 @@ export async function analyzeSymptoms(req, res) {
       }
     }
 
-    const responseText = result.response.text();
+    const responseText = result.choices[0]?.message?.content || '';
 
     // Strip markdown code fences if any
     let cleanJson = responseText
