@@ -35,7 +35,7 @@ export default function LoadingPage() {
               animate={{ scale: [1, 1.08, 1] }}
               transition={{ duration: 1, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <img src="/logo.svg" alt="CarePath Logo" className="w-24 h-24 object-contain drop-shadow-2xl opacity-90" />
+              <img src="/logo.png" alt="CarePath Logo" className="w-36 h-36 object-cover scale-110 drop-shadow-2xl opacity-90" />
             </motion.div>
           </motion.div>
         </motion.div>

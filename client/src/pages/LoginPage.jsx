@@ -47,7 +47,7 @@ export default function LoginPage({ onNavigate }) {
           <div className="relative z-10">
             <div className="flex justify-center mb-8">
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/20 bg-[#0A140F] border border-emerald-500/20">
-                <img src="/logo.svg" alt="CarePath" className="w-8 h-8 drop-shadow-md" />
+                <img src="/logo.png" alt="CarePath" className="w-14 h-14 object-cover scale-110 drop-shadow-md" />
               </div>
             </div>
             

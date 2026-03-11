@@ -56,9 +56,6 @@ export default function HowItWorks() {
 
         {/* Steps */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-          {/* Connecting line (desktop) */}
-          <div className="hidden md:block absolute top-24 left-[16.5%] right-[16.5%] h-0.5 bg-gradient-to-r from-emerald-200 via-teal-200 to-green-200 z-0" />
-
           {STEPS.map(({ step, icon: Icon, title, description, color, bgColor, borderColor }, i) => (
             <motion.div
               key={step}
@@ -74,7 +71,7 @@ export default function HowItWorks() {
                 className={`glass-card p-6 text-center card-hover border ${borderColor} relative overflow-hidden group`}
               >
                 {/* Step number watermark */}
-                <span className="absolute top-3 right-4 text-6xl font-black text-gray-100/60 select-none pointer-events-none group-hover:text-emerald-100/60 transition-colors">
+                <span className="absolute top-3 right-4 text-6xl font-black text-emerald-400/10 select-none pointer-events-none group-hover:text-emerald-400/20 transition-colors">
                   {step}
                 </span>
 

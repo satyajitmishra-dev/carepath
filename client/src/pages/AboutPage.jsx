@@ -72,7 +72,7 @@ export default function AboutPage() {
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-[#E8F8F2] tracking-tight flex items-center justify-center gap-4">
             About <span className="gradient-text">CarePath</span>
-            <img src="/logo.svg" alt="CarePath Logo" className="w-12 h-12 object-contain drop-shadow-[0_0_15px_rgba(80,200,120,0.4)]" />
+            <img src="/logo.png" alt="CarePath Logo" className="w-20 h-20 object-cover scale-110 drop-shadow-[0_0_15px_rgba(80,200,120,0.4)]" />
           </h1>
           <p className="text-emerald-100/50 mt-3 max-w-lg mx-auto">
             An AI-powered healthcare navigation platform that helps patients find the right specialist — instantly.

@@ -14,8 +14,8 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo.svg",
-      "type": "image/svg+xml",
+      "src": "logo.png",
+      "type": "image/png",
       "sizes": "any",
       "purpose": "any maskable"
     }

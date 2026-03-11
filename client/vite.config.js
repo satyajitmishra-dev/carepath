@@ -9,7 +9,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'logo.svg'],
+      includeAssets: ['favicon.ico', 'logo.png'],
       manifest: {
         name: 'CarePath AI Navigator',
         short_name: 'CarePath',
@@ -19,9 +19,9 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: 'logo.svg',
+            src: 'logo.png',
             sizes: 'any',
-            type: 'image/svg+xml',
+            type: 'image/png',
             purpose: 'any maskable'
           }
         ]

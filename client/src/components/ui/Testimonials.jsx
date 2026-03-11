@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
-import { Star, Quote } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const TESTIMONIALS = [
   {
@@ -25,7 +26,46 @@ const TESTIMONIALS = [
   },
 ];
 
+const slideVariants = {
+  enter: (direction) => ({
+    x: direction > 0 ? 300 : -300,
+    opacity: 0,
+    scale: 0.95,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: { type: 'spring', stiffness: 300, damping: 30 },
+  },
+  exit: (direction) => ({
+    x: direction < 0 ? 300 : -300,
+    opacity: 0,
+    scale: 0.95,
+    transition: { duration: 0.25 },
+  }),
+};
+
 export default function Testimonials() {
+  const [[currentIndex, direction], setSlide] = useState([0, 0]);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const paginate = useCallback((newDirection) => {
+    setSlide(([prev]) => {
+      const next = (prev + newDirection + TESTIMONIALS.length) % TESTIMONIALS.length;
+      return [next, newDirection];
+    });
+  }, []);
+
+  // Auto-advance every 5 seconds
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => paginate(1), 5000);
+    return () => clearInterval(timer);
+  }, [isPaused, paginate]);
+
+  const { text, name, location, rating, avatar } = TESTIMONIALS[currentIndex];
+
   return (
     <section className="py-16 px-4" id="testimonials">
       <div className="max-w-5xl mx-auto">
@@ -43,42 +83,82 @@ export default function Testimonials() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {TESTIMONIALS.map(({ text, name, location, rating, avatar }, i) => (
-            <motion.div
-              key={name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ delay: i * 0.12, type: 'spring', stiffness: 200 }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="glass-card p-5 card-hover relative group"
-            >
-              {/* Quote icon */}
-              <Quote className="absolute top-4 right-4 w-8 h-8 text-emerald-100 group-hover:text-emerald-200 transition-colors" />
+        {/* Carousel */}
+        <div
+          className="relative max-w-xl mx-auto"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Nav Arrows */}
+          <button
+            onClick={() => paginate(-1)}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-12 z-20 w-9 h-9 rounded-full bg-[#0A140F]/60 border border-emerald-500/20 backdrop-blur-md flex items-center justify-center text-emerald-300 hover:text-white hover:border-emerald-400/50 transition-all cursor-pointer"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => paginate(1)}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-12 z-20 w-9 h-9 rounded-full bg-[#0A140F]/60 border border-emerald-500/20 backdrop-blur-md flex items-center justify-center text-emerald-300 hover:text-white hover:border-emerald-400/50 transition-all cursor-pointer"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
 
-              {/* Stars */}
-              <div className="flex gap-0.5 mb-3">
-                {Array.from({ length: rating }).map((_, j) => (
-                  <Star key={j} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                ))}
-              </div>
+          {/* Card container */}
+          <div className="overflow-hidden relative min-h-[220px]">
+            <AnimatePresence initial={false} custom={direction} mode="wait">
+              <motion.div
+                key={currentIndex}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                className="glass-card p-6 sm:p-8 card-hover relative group"
+              >
+                {/* Quote icon */}
+                <Quote className="absolute top-4 right-4 w-8 h-8 text-emerald-100 group-hover:text-emerald-200 transition-colors" />
 
-              {/* Text */}
-              <p className="text-emerald-100/70 text-sm leading-relaxed mb-4 relative z-10">
-                {text}
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
-                <span className="text-2xl">{avatar}</span>
-                <div>
-                  <p className="font-bold text-[#E8F8F2] text-sm">{name}</p>
-                  <p className="text-emerald-100/40 text-[11px]">{location}</p>
+                {/* Stars */}
+                <div className="flex gap-0.5 mb-3">
+                  {Array.from({ length: rating }).map((_, j) => (
+                    <Star key={j} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                  ))}
                 </div>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Text */}
+                <p className="text-emerald-100/70 text-sm sm:text-base leading-relaxed mb-5 relative z-10">
+                  {text}
+                </p>
+
+                {/* Author */}
+                <div className="flex items-center gap-3 pt-3 border-t border-gray-100/10">
+                  <span className="text-2xl">{avatar}</span>
+                  <div>
+                    <p className="font-bold text-[#E8F8F2] text-sm">{name}</p>
+                    <p className="text-emerald-100/40 text-[11px]">{location}</p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Dot indicators */}
+          <div className="flex justify-center gap-2 mt-6">
+            {TESTIMONIALS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setSlide([i, i > currentIndex ? 1 : -1])}
+                aria-label={`Go to testimonial ${i + 1}`}
+                className={`transition-all duration-300 rounded-full cursor-pointer border-none ${
+                  i === currentIndex
+                    ? 'w-6 h-2 bg-emerald-400'
+                    : 'w-2 h-2 bg-emerald-400/30 hover:bg-emerald-400/60'
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

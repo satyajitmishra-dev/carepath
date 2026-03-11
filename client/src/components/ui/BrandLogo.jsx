@@ -8,10 +8,10 @@ export default function BrandLogo({
   className = '',
 }) {
   const sizeMap = {
-    sm: 'w-8 h-8',
-    md: 'w-10 h-10',
-    lg: 'w-14 h-14',
-    xl: 'w-20 h-20',
+    sm: 'w-12 h-12',
+    md: 'w-16 h-16',
+    lg: 'w-20 h-20',
+    xl: 'w-28 h-28',
   };
 
   const titleSizeMap = {
@@ -39,7 +39,7 @@ export default function BrandLogo({
           isDark ? 'shadow-[0_0_24px_rgba(80,200,120,0.18)]' : 'shadow-lg shadow-emerald-500/10'
         }`}
       >
-        <img src="/logo.svg" alt="CarePath logo" className="w-full h-full object-contain" />
+        <img src="/logo.png" alt="CarePath logo" className="w-full h-full object-cover scale-110" />
       </motion.div>
 
       {showWordmark && (
