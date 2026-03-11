@@ -1,0 +1,359 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: carepath --default;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ── CarePath Custom DaisyUI Theme ── */
+@theme {
+  --color-mint: #D1F2EB;
+  --color-emerald: #50C878;
+  --color-teal: #0B6E4F;
+  --color-evergreen: #013220;
+  --color-mint-light: #E8F8F2;
+  --color-emerald-light: #7EDBA0;
+  --color-teal-light: #0F9B6F;
+  --color-evergreen-light: #024A2E;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  /* DaisyUI theme definition */
+  [data-theme="carepath"] {
+    --p: 148 59% 38%;
+    --pf: 153 85% 15%;
+    --pc: 152 40% 95%;
+    --s: 148 80% 55%;
+    --sf: 148 70% 45%;
+    --sc: 160 90% 10%;
+    --a: 160 65% 30%;
+    --af: 160 55% 22%;
+    --ac: 152 40% 95%;
+    --n: 155 90% 10%;
+    --nf: 155 85% 7%;
+    --nc: 152 40% 95%;
+    --b1: 160 30% 97%;
+    --b2: 155 35% 93%;
+    --b3: 150 30% 88%;
+    --bc: 155 90% 10%;
+    --in: 198 93% 60%;
+    --su: 148 59% 38%;
+    --wa: 43 96% 56%;
+    --er: 0 84% 50%;
+    --rounded-box: 1rem;
+    --rounded-btn: 0.75rem;
+    --rounded-badge: 999px;
+    --animation-btn: 0.3s;
+    --animation-input: 0.2s;
+    --btn-focus-scale: 0.97;
+    --tab-radius: 0.7rem;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #F4FAF7;
+    color: #013220;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(80, 200, 120, 0.3);
+    color: #013220;
+  }
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E8F8F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #50C878, #0B6E4F);
+  border-radius: 999px;
+}
+
+/* ── Glassmorphism utilities ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(80, 200, 120, 0.15);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(1, 50, 32, 0.06);
+}
+
+.glass-dark {
+  background: rgba(1, 50, 32, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(80, 200, 120, 0.2);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(80, 200, 120, 0.2);
+  border-radius: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-input:focus-within {
+  border-color: #50C878;
+  box-shadow: 0 0 0 4px rgba(80, 200, 120, 0.15), 0 8px 32px rgba(1, 50, 32, 0.08);
+}
+
+/* ── Gradient utilities ── */
+.gradient-primary {
+  background: linear-gradient(135deg, #50C878 0%, #0B6E4F 100%);
+}
+
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(80, 200, 120, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(11, 110, 79, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(209, 242, 235, 0.3) 0%, transparent 50%),
+    #F4FAF7;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #0B6E4F 0%, #50C878 50%, #0B6E4F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animated background blob ── */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: blobFloat 8s ease-in-out infinite;
+}
+
+.blob-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(80, 200, 120, 0.3);
+  top: -100px;
+  left: -100px;
+}
+
+.blob-2 {
+  width: 300px;
+  height: 300px;
+  background: rgba(11, 110, 79, 0.25);
+  bottom: -80px;
+  right: -80px;
+  animation-delay: -4s;
+}
+
+.blob-3 {
+  width: 250px;
+  height: 250px;
+  background: rgba(209, 242, 235, 0.4);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -2s;
+}
+
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* ── Pulse dot (for map user location) ── */
+.pulse-dot {
+  width: 16px;
+  height: 16px;
+  background: #50C878;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 0 0 rgba(80, 200, 120, 0.6);
+  animation: pulseRing 2s ease-out infinite;
+}
+
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(80, 200, 120, 0.4);
+  animation: pulseRing 2s ease-out infinite 0.5s;
+}
+
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(80, 200, 120, 0.5); }
+  70% { box-shadow: 0 0 0 15px rgba(80, 200, 120, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(80, 200, 120, 0); }
+}
+
+/* ── Heartbeat loader ── */
+.heartbeat-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 2s ease-in-out infinite;
+}
+
+@keyframes drawLine {
+  0% { stroke-dashoffset: 1000; }
+  50% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -1000; }
+}
+
+/* ── Shimmer ── */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(80, 200, 120, 0.08) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ── Floating animation ── */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-delay-1 { animation-delay: -2s; }
+.float-delay-2 { animation-delay: -4s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* ── Glow effect ── */
+.glow-emerald {
+  box-shadow: 0 0 20px rgba(80, 200, 120, 0.3), 0 0 60px rgba(80, 200, 120, 0.1);
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(80, 200, 120, 0.3);
+}
+
+/* ── Card hover ── */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(1, 50, 32, 0.1), 0 0 0 1px rgba(80, 200, 120, 0.2);
+}
+
+/* ── Urgency badges ── */
+.urgency-emergency {
+  background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+  animation: emergencyPulse 1.5s ease-in-out infinite;
+}
+
+.urgency-urgent {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+}
+
+.urgency-routine {
+  background: linear-gradient(135deg, #50C878 0%, #0B6E4F 100%);
+}
+
+@keyframes emergencyPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(220, 38, 38, 0); }
+}
+
+/* ── Button ripple ── */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 10%);
+  transform: scale(10);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.btn-ripple:active::after {
+  transform: scale(0);
+  opacity: 0.4;
+  transition: 0s;
+}
+
+/* ── Leaflet map overrides ── */
+.leaflet-container {
+  border-radius: 1rem;
+  z-index: 1;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0.75rem !important;
+  box-shadow: 0 8px 32px rgba(1, 50, 32, 0.12) !important;
+}
+
+.leaflet-popup-tip {
+  box-shadow: none !important;
+}
+
+/* ── Stagger animation utility ── */
+.stagger-in > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: staggerReveal 0.5s ease forwards;
+}
+
+.stagger-in > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-in > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-in > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-in > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-in > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-in > *:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes staggerReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
