@@ -1,99 +1,161 @@
-import { motion } from 'framer-motion';
-import { MessageSquareText, Brain, MapPin, ArrowRight } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { MessageSquareText, Brain, MapPin } from 'lucide-react';
 
 const STEPS = [
   {
     step: '01',
     icon: MessageSquareText,
     title: 'Describe Symptoms',
-    description: 'Type your symptoms in plain language — no medical jargon needed. Just say what you feel.',
-    color: 'from-emerald-400 to-emerald-600',
-    bgColor: 'bg-emerald-900/40',
-    borderColor: 'border-emerald-500/30',
+    description: 'Type what you feel in plain English — no medical jargon. Voice input also supported for hands-free triage.',
+    accent: 'from-emerald-400 to-emerald-600',
+    glowColor: 'rgba(52,211,153,0.12)',
+    borderColor: 'rgba(52,211,153,0.14)',
+    numberColor: 'rgba(52,211,153,0.06)',
   },
   {
     step: '02',
     icon: Brain,
     title: 'AI Analyzes',
-    description: 'Our AI engine identifies possible conditions, the right specialist, and urgency level in seconds.',
-    color: 'from-teal-400 to-teal-600',
-    bgColor: 'bg-teal-50',
-    borderColor: 'border-teal-200',
+    description: 'Llama 3.1 identifies possible conditions, urgency level, and the ideal specialist type in seconds.',
+    accent: 'from-teal-400 to-cyan-600',
+    glowColor: 'rgba(34,211,238,0.1)',
+    borderColor: 'rgba(34,211,238,0.12)',
+    numberColor: 'rgba(34,211,238,0.05)',
   },
   {
     step: '03',
     icon: MapPin,
     title: 'Find Nearby Clinics',
-    description: 'See nearby specialists on an interactive map with fees, ratings, and one-tap directions.',
-    color: 'from-green-400 to-green-600',
-    bgColor: 'bg-green-50',
-    borderColor: 'border-green-200',
+    description: 'See verified specialists on a live interactive map — complete with fees, ratings, and one-tap directions.',
+    accent: 'from-green-400 to-emerald-600',
+    glowColor: 'rgba(74,222,128,0.1)',
+    borderColor: 'rgba(74,222,128,0.12)',
+    numberColor: 'rgba(74,222,128,0.05)',
   },
 ];
 
 export default function HowItWorks() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+
   return (
-    <section className="py-20 px-4 relative" id="how-it-works">
-      <div className="max-w-5xl mx-auto">
+    <section className="py-32 px-6 relative overflow-hidden" id="how-it-works" ref={ref}>
+
+      {/* Section divider top */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-emerald-500/20 to-transparent" />
+
+      {/* Ambient glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] blur-[120px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(16,185,129,0.04), transparent 80%)' }} />
+
+      <div className="max-w-6xl mx-auto">
+
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          initial={{ opacity: 0, y: 28 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-20"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/60 border border-emerald-500/30/60 text-xs font-semibold text-emerald-300 mb-4">
-            Simple 3-Step Process
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#E8F8F2] tracking-tight">
-            How <span className="gradient-text">CarePath</span> Works
-          </h2>
-          <p className="text-emerald-100/50 mt-3 max-w-md mx-auto text-sm">
-            From symptoms to specialist in under 60 seconds — no login, no hassle.
-          </p>
+          {/* label */}
+          <div className="inline-block px-3 py-1 rounded-full mb-6 text-[11px] font-bold tracking-[0.2em] uppercase"
+            style={{
+              background: 'rgba(4, 40, 24, 0.6)',
+              border: '1px solid rgba(52,211,153,0.18)',
+              color: 'rgba(52,211,153,0.7)',
+              backdropFilter: 'blur(12px)',
+            }}>
+            3-Step Process
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <h2
+              className="text-5xl sm:text-6xl font-bold tracking-tight leading-[1.0]"
+              style={{ fontFamily: "'Syne', sans-serif", color: '#fff' }}
+            >
+              How <span className="gradient-text">CarePath</span>
+              <br />Works
+            </h2>
+            <p className="text-white/30 max-w-xs text-sm leading-relaxed sm:text-right">
+              From symptoms to specialist — no login, no friction, under 60 seconds.
+            </p>
+          </div>
         </motion.div>
 
-        {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-          {STEPS.map(({ step, icon: Icon, title, description, color, bgColor, borderColor }, i) => (
+        {/* Steps grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative">
+
+          {/* Connector (desktop) */}
+          <div
+            className="hidden md:block absolute top-[60px] left-[calc(16.67%+24px)] right-[calc(16.67%+24px)] h-px z-0"
+            style={{ background: 'linear-gradient(90deg, transparent, rgba(52,211,153,0.18), transparent)' }}
+          />
+
+          {STEPS.map(({ step, icon: Icon, title, description, accent, glowColor, borderColor, numberColor }, i) => (
             <motion.div
               key={step}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ delay: i * 0.15, type: 'spring', stiffness: 200 }}
-              className="relative z-10"
+              initial={{ opacity: 0, y: 40 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.18 + i * 0.16, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="relative z-10 group"
             >
               <motion.div
-                whileHover={{ y: -6, scale: 1.02 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-                className={`glass-card p-6 text-center card-hover border ${borderColor} relative overflow-hidden group`}
+                whileHover={{ y: -8 }}
+                transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+                className="relative rounded-3xl p-8 overflow-hidden h-full"
+                style={{
+                  background: 'rgba(6, 14, 10, 0.7)',
+                  border: `1px solid ${borderColor}`,
+                  backdropFilter: 'blur(24px)',
+                  boxShadow: `0 0 0 1px rgba(255,255,255,0.025) inset, 0 20px 60px rgba(0,0,0,0.5)`,
+                }}
               >
-                {/* Step number watermark */}
-                <span className="absolute top-3 right-4 text-6xl font-black text-emerald-400/10 select-none pointer-events-none group-hover:text-emerald-400/20 transition-colors">
-                  {step}
-                </span>
+                {/* Hover glow */}
+                <div
+                  className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                  style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, ${glowColor}, transparent 70%)` }}
+                />
 
-                {/* Icon */}
-                <div className="relative z-10 flex justify-center mb-4">
-                  <motion.div
-                    whileHover={{ rotate: [0, -8, 8, 0] }}
-                    className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center shadow-lg`}
+                {/* Top row: icon + big number */}
+                <div className="flex items-center justify-between mb-8">
+                  {/* Icon badge */}
+                  <div
+                    className={`w-13 h-13 w-12 h-12 rounded-2xl bg-gradient-to-br ${accent} flex items-center justify-center shadow-lg relative`}
+                    style={{ boxShadow: `0 0 20px ${glowColor.replace('0.12', '0.3')}` }}
                   >
-                    <Icon className="w-7 h-7 text-white" />
-                  </motion.div>
+                    <Icon className="w-5 h-5 text-white" strokeWidth={2} />
+                    {/* Step pip */}
+                    <div
+                      className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-[#020806] flex items-center justify-center"
+                      style={{ border: `1px solid ${borderColor}` }}
+                    >
+                      <span className="text-[8px] font-black text-emerald-400">{i + 1}</span>
+                    </div>
+                  </div>
+
+                  {/* Large ghost number */}
+                  <span
+                    className="text-7xl font-black leading-none select-none"
+                    style={{ color: numberColor, fontFamily: "'Syne', sans-serif" }}
+                  >
+                    {step}
+                  </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-[#E8F8F2] mb-2 relative z-10">{title}</h3>
-                <p className="text-emerald-100/50 text-sm leading-relaxed relative z-10">{description}</p>
+                <h3
+                  className="text-xl font-bold text-white mb-3"
+                  style={{ fontFamily: "'Syne', sans-serif" }}
+                >
+                  {title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.32)' }}>
+                  {description}
+                </p>
 
-                {/* Arrow connector on mobile */}
-                {i < STEPS.length - 1 && (
-                  <div className="md:hidden flex justify-center mt-4">
-                    <ArrowRight className="w-5 h-5 text-emerald-300 rotate-90" />
-                  </div>
-                )}
+                {/* Bottom accent line */}
+                <div
+                  className={`absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r ${accent} opacity-0 group-hover:opacity-25 transition-opacity duration-500`}
+                />
               </motion.div>
             </motion.div>
           ))}

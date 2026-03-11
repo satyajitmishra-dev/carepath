@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @plugin "daisyui" {
   themes: carepath --default;
 }
@@ -15,6 +15,7 @@
   --color-teal-light: #0F9B6F;
   --color-evergreen-light: #024A2E;
   --font-sans: 'Inter', sans-serif;
+  --font-display: 'Syne', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -62,11 +63,24 @@
 
   body {
     font-family: 'Inter', sans-serif;
-    background: #050B08;
+    background: #020806;
     color: #E8F8F2;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Grain noise overlay on the entire page */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px 180px;
   }
 
   ::selection {
@@ -85,18 +99,22 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #50C878, #0B6E4F);
+  background: linear-gradient(180deg, #34d399, #059669, #064e3b);
   border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
 /* ── Glassmorphism utilities ── */
 .glass-card {
-  background: rgba(15, 25, 20, 0.5);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(80, 200, 120, 0.15);
-  border-radius: 1rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  background: rgba(8, 18, 13, 0.55);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 12px 48px rgba(0, 0, 0, 0.55),
+    0 1px 0 rgba(255,255,255,0.06) inset;
 }
 
 .glass-dark {
@@ -135,10 +153,22 @@
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #7EDBA0 0%, #50C878 50%, #7EDBA0 100%);
+  background: linear-gradient(135deg, #a7f3d0 0%, #34d399 30%, #10b981 60%, #6ee7b7 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradientShift 4s linear infinite;
+}
+
+/* Display font utility */
+.font-display {
+  font-family: 'Syne', sans-serif;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 /* ── Animated background blob ── */

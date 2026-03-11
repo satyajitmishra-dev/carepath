@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, HelpCircle } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 const FAQ_DATA = [
   {
@@ -9,11 +9,11 @@ const FAQ_DATA = [
   },
   {
     q: 'How accurate is the AI analysis?',
-    a: 'Our AI uses Google\'s Gemini model to analyze symptoms and suggest the most relevant specialist type. While highly informed, it is not a substitute for professional medical judgment.',
+    a: 'Our AI uses Llama 3.1 to analyze symptoms and suggest the most relevant specialist type. While highly informed, it is not a substitute for professional medical judgment.',
   },
   {
     q: 'Is my health data stored?',
-    a: 'No. CarePath does not store, log, or transmit your symptom data. All analysis happens in real-time and nothing is saved after your session.',
+    a: 'No. CarePath does not store, log, or transmit your symptom data. All analysis happens in real-time and nothing is persisted after your session ends.',
   },
   {
     q: 'How does the affordable filter work?',
@@ -21,74 +21,99 @@ const FAQ_DATA = [
   },
   {
     q: 'Can I use this on mobile?',
-    a: 'Yes! CarePath is fully responsive and works beautifully on phones, tablets, and desktops. Location detection works best on mobile devices.',
+    a: 'Yes! CarePath is fully responsive and installable as a PWA for quick home-screen access. Location detection works best on mobile.',
   },
   {
     q: 'Which cities are supported?',
-    a: 'Currently, our clinic database covers the Kolkata metropolitan area. We plan to expand to other cities in future versions.',
+    a: 'Currently our clinic database covers the Kolkata metropolitan area. We plan to expand to more cities in future releases.',
   },
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [open, setOpen] = useState(null);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="py-16 px-4" id="faq">
+    <section className="py-32 px-6 relative overflow-hidden" id="faq" ref={ref}>
+
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-blue-400/15 to-transparent" />
+
       <div className="max-w-3xl mx-auto">
+
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="text-center mb-10"
+          initial={{ opacity: 0, y: 28 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-20"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/60 text-xs font-semibold text-blue-700 mb-4">
-            <HelpCircle className="w-3 h-3" />
-            Common Questions
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#E8F8F2] tracking-tight">
-            Frequently Asked <span className="gradient-text">Questions</span>
+          <div className="inline-block px-3 py-1 rounded-full mb-6 text-[11px] font-bold tracking-[0.2em] uppercase"
+            style={{
+              background: 'rgba(0, 20, 60, 0.5)',
+              border: '1px solid rgba(96,165,250,0.18)',
+              color: 'rgba(96,165,250,0.65)',
+              backdropFilter: 'blur(12px)',
+            }}>
+            FAQ
+          </div>
+          <h2
+            className="text-5xl sm:text-6xl font-bold tracking-tight"
+            style={{ fontFamily: "'Syne', sans-serif", color: '#fff' }}
+          >
+            Common <span className="gradient-text">Questions</span>
           </h2>
         </motion.div>
 
-        <div className="space-y-3">
+        {/* Items */}
+        <div className="space-y-2">
           {FAQ_DATA.map(({ q, a }, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-30px' }}
-              transition={{ delay: i * 0.06 }}
+              initial={{ opacity: 0, y: 18 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.06 + i * 0.07, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <div
-                className={`glass-card overflow-hidden transition-all duration-300 ${
-                  openIndex === i ? 'border-emerald-500/30 shadow-md shadow-emerald-500/5' : ''
-                }`}
+                className="rounded-2xl overflow-hidden transition-all duration-300"
+                style={{
+                  background: open === i ? 'rgba(4, 50, 28, 0.35)' : 'rgba(255,255,255,0.018)',
+                  border: open === i ? '1px solid rgba(52,211,153,0.18)' : '1px solid rgba(255,255,255,0.05)',
+                }}
               >
                 <button
-                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                  className="w-full flex items-center justify-between p-4 text-left cursor-pointer bg-transparent border-none"
+                  onClick={() => setOpen(open === i ? null : i)}
+                  className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer bg-transparent border-none gap-4"
                 >
-                  <span className="font-semibold text-[#E8F8F2] text-sm pr-4">{q}</span>
+                  <span
+                    className="font-semibold text-sm leading-snug transition-colors duration-200"
+                    style={{ color: open === i ? '#fff' : 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif" }}
+                  >
+                    {q}
+                  </span>
                   <motion.div
-                    animate={{ rotate: openIndex === i ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
+                    animate={{ rotate: open === i ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
                     className="shrink-0"
                   >
-                    <ChevronDown className="w-4 h-4 text-emerald-300" />
+                    <ChevronDown
+                      className="w-4 h-4 transition-colors duration-200"
+                      style={{ color: open === i ? 'rgba(52,211,153,0.9)' : 'rgba(255,255,255,0.18)' }}
+                    />
                   </motion.div>
                 </button>
 
                 <AnimatePresence>
-                  {openIndex === i && (
+                  {open === i && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <div className="px-4 pb-4">
-                        <div className="h-px bg-emerald-100 mb-3" />
-                        <p className="text-emerald-100/50 text-sm leading-relaxed">{a}</p>
+                      <div className="px-6 pb-6">
+                        <div className="h-px mb-4" style={{ background: 'rgba(52,211,153,0.1)' }} />
+                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>{a}</p>
                       </div>
                     </motion.div>
                   )}
