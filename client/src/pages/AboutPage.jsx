@@ -32,7 +32,7 @@ const TEAM_MEMBERS = [
 
 const FEATURES = [
   { icon: Brain, title: 'AI-Powered Analysis', desc: 'Gemini AI identifies the right specialist from plain-language symptom descriptions' },
-  { icon: Shield, title: 'Privacy First', desc: 'No data stored, no login required. Your health info stays with you.' },
+  { icon: Shield, title: 'Privacy First', desc: 'No data stored,Your health info stays with you.' },
   { icon: Target, title: '3 Urgency Levels', desc: 'Emergency, Urgent, or Routine — know exactly when to act fast' },
   { icon: Globe, title: 'Interactive Map', desc: 'Find nearest specialists with real-time distance, fees, and ratings' },
   { icon: Heart, title: 'Affordable Filter', desc: 'Filter clinics under ₹500 to find budget-friendly healthcare' },

@@ -47,7 +47,6 @@ export default function CTASection() {
 
           <div className="flex items-center justify-center gap-6 mt-6 text-emerald-100/40">
             <span className="flex items-center gap-1.5 text-xs">
-              <Shield className="w-3 h-3" /> No signup required
             </span>
             <span className="text-xs">•</span>
             <span className="text-xs">Free to use</span>

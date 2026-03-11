@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage';
 import LoadingPage from './pages/LoadingPage';
 import ResultsPage from './pages/ResultsPage';
 import AboutPage from './pages/AboutPage';
+import AmbulancePage from './pages/AmbulancePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import EmergencyWidget from './components/ui/EmergencyWidget';
@@ -74,6 +75,11 @@ export default function App() {
         {!showApp && currentPage === 'about' && (
           <motion.div key="about" {...pageTransition}>
             <AboutPage />
+          </motion.div>
+        )}
+        {!showApp && currentPage === 'ambulance' && (
+          <motion.div key="ambulance" {...pageTransition}>
+            <AmbulancePage onNavigate={setCurrentPage} />
           </motion.div>
         )}
         {!showApp && currentPage === 'login' && (

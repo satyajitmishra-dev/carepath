@@ -83,14 +83,18 @@ export default function Navbar({ onNavigate, currentPage }) {
           <div className="flex items-center gap-3">
             <TranslateWidget />
 
-            <motion.div
-              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md bg-white/5 border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
-              animate={{ borderColor: ['rgba(255,255,255,0.1)', 'rgba(80,200,120,0.3)', 'rgba(255,255,255,0.1)'] }}
+            <motion.button
+              onClick={() => {
+                onNavigate?.('ambulance');
+                setMenuOpen(false);
+              }}
+              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md bg-rose-500/10 border border-rose-500/20 shadow-[0_4px_12px_rgba(0,0,0,0.1)] cursor-pointer hover:bg-rose-500/20 transition-colors"
+              animate={{ borderColor: ['rgba(244,63,94,0.1)', 'rgba(244,63,94,0.4)', 'rgba(244,63,94,0.1)'] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <Heart className="w-4 h-4 text-emerald-400" />
-              <span className="text-emerald-100 text-sm font-medium">Saving Lives with AI</span>
-            </motion.div>
+              <Heart className="w-4 h-4 text-rose-500" />
+              <span className="text-rose-100 text-sm font-medium">Get ambulance in minutes</span>
+            </motion.button>
 
             {/* Auth State UI */}
             <div className="hidden sm:flex items-center gap-2">

@@ -72,7 +72,18 @@ export default function ResultsPage() {
           allowTaint: true,
           backgroundColor: '#07100C',
           windowWidth: element.scrollWidth,
-          windowHeight: element.scrollHeight
+          windowHeight: element.scrollHeight,
+          ignoreElements: (el) => {
+            // Ignore problematic daisyUI oklab/oklch elements if they exist or hidden interactive maps
+            return el.classList && el.classList.contains('leaflet-control-container');
+          },
+          onclone: (clonedDoc) => {
+             // html2canvas struggles with oklab/oklch. Clean out DaisyUI/tailwind root variables that use oklab
+             const rootelem = clonedDoc.documentElement;
+             if (rootelem) {
+                 rootelem.removeAttribute('data-theme');
+             }
+          }
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };

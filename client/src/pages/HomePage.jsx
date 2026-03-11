@@ -57,22 +57,22 @@ function CountUpStat({ end, duration = 2, prefix = '', suffix = '', decimals = 0
 function FloatingBadge({ icon: Icon, label, value, color, className, delay }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.6, y: 20 }}
+      initial={{ opacity: 0, scale: 0.8, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ delay, type: 'spring', stiffness: 200, damping: 18 }}
+      transition={{ delay, type: 'spring', stiffness: 200, damping: 20 }}
       className={`absolute z-20 ${className}`}
     >
       <motion.div
-        animate={{ y: [-6, 6, -6] }}
-        transition={{ duration: 4 + delay, repeat: Infinity, ease: 'easeInOut' }}
-        className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl px-4 py-3 shadow-2xl shadow-black/30 flex items-center gap-3 min-w-max"
+        animate={{ y: [-6, 6, -6], rotateZ: [-1, 1, -1] }}
+        transition={{ duration: 5 + delay, repeat: Infinity, ease: 'easeInOut' }}
+        className="backdrop-blur-xl bg-slate-900/40 border border-white/10 rounded-2xl px-4 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex items-center gap-3 min-w-max hover:bg-slate-900/60 transition-colors cursor-default"
       >
-        <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${color}`}>
-          <Icon className="w-5 h-5 text-white" />
+        <div className={`w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br ${color} shadow-inner`}>
+          <Icon className="w-5 h-5 text-white" strokeWidth={2.5} />
         </div>
         <div>
-          <div className="text-white font-black text-sm leading-none">{value}</div>
-          <div className="text-white/60 text-[10px] font-medium mt-0.5 uppercase tracking-wide">{label}</div>
+          <div className="text-white font-black text-sm leading-tight tracking-wide">{value}</div>
+          <div className="text-emerald-200/70 text-[10px] font-bold mt-0.5 uppercase tracking-wider">{label}</div>
         </div>
       </motion.div>
     </motion.div>
@@ -209,16 +209,18 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, type: 'spring', stiffness: 90, damping: 16 }}
-                className="mb-6"
+                className="mb-8"
               >
-                <h1 className="text-5xl sm:text-6xl xl:text-7xl font-black tracking-tight leading-[1.05]">
-                  <span className="block text-white">Find the</span>
-                  <span className="block bg-gradient-to-r from-emerald-300 via-teal-300 to-emerald-400 bg-clip-text text-transparent">Right Doctor.</span>
+                <h1 className="text-5xl sm:text-6xl xl:text-[5rem] font-black tracking-tighter leading-[1.05]">
+                  <span className="block text-white mb-2">Find the</span>
+                  <span className="block bg-gradient-to-r from-emerald-300 via-teal-300 to-emerald-400 bg-clip-text text-transparent mb-2">Right Doctor.</span>
                   <span className="block text-white">Right Now.</span>
                 </h1>
+                <p className="mt-6 text-emerald-100/60 text-lg max-w-lg font-medium leading-relaxed">
+                  Experience intelligent healthcare navigation. Describe your symptoms naturally, and let our AI connect you with the perfect specialist in seconds.
+                </p>
               </motion.div>
 
-              {/* Typing sub */}
               {/* Search */}
               <motion.div
                 initial={{ opacity: 0, y: 32, scale: 0.94 }}
@@ -226,8 +228,10 @@ export default function HomePage() {
                 transition={{ delay: 0.9, type: 'spring', stiffness: 100, damping: 16 }}
                 className="w-full max-w-xl relative"
               >
-                <div className="absolute -inset-3 bg-gradient-to-r from-emerald-500/20 via-teal-500/10 to-emerald-500/20 blur-2xl rounded-[3rem] -z-10" />
-                <SearchBar />
+                <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/30 via-emerald-400/10 to-teal-500/30 rounded-[2.5rem] blur-xl opacity-50" />
+                <div className="relative rounded-[2rem] bg-slate-900/50 backdrop-blur-2xl border border-white/10 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+                   <SearchBar />
+                </div>
               </motion.div>
 
               {/* Trust row */}
@@ -235,15 +239,15 @@ export default function HomePage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2 }}
-                className="mt-7 flex flex-wrap items-center gap-5"
+                className="mt-8 flex flex-wrap items-center gap-6 px-2"
               >
                 {[
-                  { icon: Shield, text: 'No data stored' },
-                  { icon: CheckCircle2, text: 'No login required' },
+                  { icon: Shield, text: 'HIPAA Compliant' },
+                  { icon: CheckCircle2, text: 'Easy find doctor' },
                   { icon: Zap, text: '< 60s results' },
                 ].map(({ icon: Ic, text }) => (
-                  <div key={text} className="flex items-center gap-1.5 text-white/35 text-xs font-medium">
-                    <Ic className="w-3.5 h-3.5 text-emerald-500" />
+                  <div key={text} className="flex items-center gap-2 text-emerald-100/50 text-xs font-semibold tracking-wide uppercase">
+                    <Ic className="w-4 h-4 text-emerald-400/80" />
                     {text}
                   </div>
                 ))}
@@ -254,16 +258,17 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.35 }}
-                className="mt-10 grid grid-cols-3 gap-4 w-full max-w-md"
+                className="mt-12 grid grid-cols-3 gap-5 w-full max-w-lg"
               >
                 {[
-                  { value: <CountUpStat end={40} suffix="+" duration={2} />, label: 'Clinics' },
-                  { value: <CountUpStat end={60} prefix="< " suffix="s" duration={2} />, label: 'Analysis' },
-                  { value: <CountUpStat end={100} suffix="%" duration={2} />, label: 'Private' },
+                  { value: <CountUpStat end={40} suffix="+" duration={2} />, label: 'Clinics Network' },
+                  { value: <CountUpStat end={60} prefix="< " suffix="s" duration={2} />, label: 'Instant Analysis' },
+                  { value: <CountUpStat end={100} suffix="%" duration={2} />, label: 'Data Privacy' },
                 ].map(({ value, label }) => (
-                  <div key={label} className="rounded-2xl bg-white/[0.04] border border-white/[0.07] px-4 py-3 text-center">
-                    <div className="text-xl font-black text-emerald-300 leading-none">{value}</div>
-                    <div className="text-[10px] text-white/35 font-semibold uppercase tracking-widest mt-1">{label}</div>
+                  <div key={label} className="relative group rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.05] px-4 py-4 text-center overflow-hidden hover:border-emerald-500/30 transition-colors">
+                    <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="relative z-10 text-2xl font-black bg-gradient-to-br from-white to-emerald-200 bg-clip-text text-transparent leading-none drop-shadow-sm">{value}</div>
+                    <div className="relative z-10 text-[10px] text-emerald-200/50 font-bold uppercase tracking-widest mt-2">{label}</div>
                   </div>
                 ))}
               </motion.div>
