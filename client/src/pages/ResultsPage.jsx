@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
-import { ArrowLeft, MapPin, Tag } from 'lucide-react';
+import { ArrowLeft, MapPin, Tag, DownloadCloud } from 'lucide-react';
 import UrgencyBadge from '../components/ui/UrgencyBadge';
 import DisclaimerBanner from '../components/ui/DisclaimerBanner';
 import CareJourneyTimeline from '../components/ui/CareJourneyTimeline';
@@ -10,12 +10,14 @@ import SpecialistCard from '../features/analysis/SpecialistCard';
 import ClinicMap from '../features/map/ClinicMap';
 import ClinicList from '../features/map/ClinicList';
 import AffordableFilter from '../features/map/AffordableFilter';
+import PostVisitFeedback from '../components/ui/PostVisitFeedback';
 import { setClinics } from '../features/map/mapSlice';
 import { clearResults } from '../features/analysis/analysisSlice';
 import { clearSymptoms } from '../features/symptoms/symptomsSlice';
 import { clearClinics } from '../features/map/mapSlice';
 import { getDistance } from '../utils/haversine';
 import allClinics from '../data/clinics.json';
+import html2pdf from 'html2pdf.js';
 
 export default function ResultsPage() {
   const dispatch = useDispatch();
@@ -47,6 +49,19 @@ export default function ResultsPage() {
     dispatch(clearClinics());
   };
 
+  const handleDownloadPDF = () => {
+    const element = document.getElementById('results-content-area');
+    const opt = {
+      margin: 1,
+      filename: `carepath-results-${new Date().getTime()}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save();
+  };
+
   if (!result) return null;
 
   return (
@@ -54,21 +69,35 @@ export default function ResultsPage() {
       <div className="absolute inset-0 gradient-mesh" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 py-8">
-        {/* Back button + symptom tags */}
+        {/* Header: Back button + Download + symptom tags */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6"
         >
-          <motion.button
-            onClick={handleBack}
-            whileHover={{ x: -3 }}
-            whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 text-sm font-medium text-teal hover:text-evergreen transition-colors cursor-pointer bg-transparent border-none"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            New Search
-          </motion.button>
+          <div className="flex items-center gap-4">
+            <motion.button
+              onClick={handleBack}
+              whileHover={{ x: -3 }}
+              whileTap={{ scale: 0.97 }}
+              className="flex items-center gap-2 text-sm font-medium text-teal hover:text-evergreen transition-colors cursor-pointer bg-transparent border-none"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              New Search
+            </motion.button>
+
+            <div className="w-px h-4 bg-emerald-200 hidden sm:block" />
+
+            <motion.button
+              onClick={handleDownloadPDF}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-700 hover:bg-emerald-200 transition-colors cursor-pointer border border-emerald-300/50"
+            >
+              <DownloadCloud className="w-4 h-4" />
+              Save as PDF
+            </motion.button>
+          </div>
 
           {symptomChips.length > 0 && (
             <div className="flex items-center gap-2 flex-wrap">
@@ -85,8 +114,8 @@ export default function ResultsPage() {
           )}
         </motion.div>
 
-        {/* Results grid */}
-        <div className="flex flex-col gap-5 stagger-in">
+        {/* Results grid (Print Area) */}
+        <div id="results-content-area" className="flex flex-col gap-5 stagger-in bg-[#F4FAF7] sm:bg-transparent rounded-2xl sm:rounded-none">
           {/* Urgency badge */}
           <UrgencyBadge level={result.urgencyLevel} reason={result.urgencyReason} />
 
@@ -123,6 +152,9 @@ export default function ResultsPage() {
           {/* Disclaimer */}
           <DisclaimerBanner disclaimer={result.disclaimer} />
         </div>
+
+        {/* Feedback Section */}
+        <PostVisitFeedback />
       </div>
     </div>
   );

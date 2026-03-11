@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { clearResults } from '../../features/analysis/analysisSlice';
 import { clearSymptoms } from '../../features/symptoms/symptomsSlice';
 import { clearClinics } from '../../features/map/mapSlice';
+import TranslateWidget from '../ui/TranslateWidget';
 
 export default function Navbar({ onNavigate, currentPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -87,6 +88,8 @@ export default function Navbar({ onNavigate, currentPage }) {
 
           {/* CTA + Mobile toggle */}
           <div className="flex items-center gap-3">
+            <TranslateWidget />
+
             <motion.div
               className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20"
               animate={{ borderColor: ['rgba(80,200,120,0.2)', 'rgba(80,200,120,0.5)', 'rgba(80,200,120,0.2)'] }}
