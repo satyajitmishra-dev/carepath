@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { ArrowLeft, MapPin, Tag, DownloadCloud } from 'lucide-react';
@@ -17,7 +17,6 @@ import { clearSymptoms } from '../features/symptoms/symptomsSlice';
 import { clearClinics } from '../features/map/mapSlice';
 import { getDistance } from '../utils/haversine';
 import allClinics from '../data/clinics.json';
-import html2pdf from 'html2pdf.js';
 
 export default function ResultsPage() {
   const dispatch = useDispatch();
@@ -49,17 +48,47 @@ export default function ResultsPage() {
     dispatch(clearClinics());
   };
 
-  const handleDownloadPDF = () => {
-    const element = document.getElementById('results-content-area');
-    const opt = {
-      margin: 1,
-      filename: `carepath-results-${new Date().getTime()}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
+  const [isDownloading, setIsDownloading] = useState(false);
 
-    html2pdf().set(opt).from(element).save();
+  const handleDownloadPDF = async () => {
+    try {
+      setIsDownloading(true);
+      const element = document.getElementById('results-content-area');
+      
+      // Temporarily give the element a highly visible styling context for PDF
+      const originalBg = element.style.backgroundColor;
+      const originalP = element.style.padding;
+      
+      element.style.backgroundColor = '#07100C'; // Match the app's dark background
+      element.style.padding = '20px';
+      
+      const opt = {
+        margin: 10,
+        filename: `carepath-results-${new Date().getTime()}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 2, 
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#07100C',
+          windowWidth: element.scrollWidth,
+          windowHeight: element.scrollHeight
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      // Import dynamically to avoid Vite SSR / missing default export issues
+      const html2pdf = (await import('html2pdf.js')).default;
+      await html2pdf().set(opt).from(element).save();
+
+      element.style.backgroundColor = originalBg;
+      element.style.padding = originalP;
+    } catch (error) {
+      console.error('PDF Download failed:', error);
+      alert('Could not download PDF. Please try again or print the page directly.');
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   if (!result) return null;
@@ -90,12 +119,13 @@ export default function ResultsPage() {
 
             <motion.button
               onClick={handleDownloadPDF}
+              disabled={isDownloading}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-400 hover:bg-emerald-200 transition-colors cursor-pointer border border-emerald-300/50"
+              className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-400 hover:bg-emerald-200 transition-colors cursor-pointer border border-emerald-300/50 disabled:opacity-50"
             >
               <DownloadCloud className="w-4 h-4" />
-              Save as PDF
+              {isDownloading ? 'Saving...' : 'Save as PDF'}
             </motion.button>
           </div>
 

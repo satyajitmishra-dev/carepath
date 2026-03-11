@@ -39,13 +39,13 @@ export default function Navbar({ onNavigate, currentPage }) {
       className="fixed top-0 left-0 right-0 z-50"
     >
       <div className="mx-4 mt-3">
-        <div className="glass-dark rounded-2xl px-6 py-3 flex items-center justify-between max-w-7xl mx-auto">
+        <div className="px-1 sm:px-2 py-2 flex items-center justify-between max-w-7xl mx-auto bg-transparent">
           {/* Logo */}
           <motion.button
             onClick={handleLogoClick}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2.5 cursor-pointer bg-transparent border-none"
+            className="flex items-center gap-2.5 cursor-pointer rounded-full px-4 py-2 backdrop-blur-md bg-white/5 border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
           >
             <div className="relative flex items-center justify-center">
               <BrandLogo size="md" theme="dark" showTagline />
@@ -58,7 +58,7 @@ export default function Navbar({ onNavigate, currentPage }) {
           </motion.button>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md bg-white/5 border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
             <NavLink
               active={currentPage === 'app' && activeScreen === 'home'}
               onClick={() => handleNavClick('home')}
@@ -84,12 +84,12 @@ export default function Navbar({ onNavigate, currentPage }) {
             <TranslateWidget />
 
             <motion.div
-              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20"
-              animate={{ borderColor: ['rgba(80,200,120,0.2)', 'rgba(80,200,120,0.5)', 'rgba(80,200,120,0.2)'] }}
+              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md bg-white/5 border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
+              animate={{ borderColor: ['rgba(255,255,255,0.1)', 'rgba(80,200,120,0.3)', 'rgba(255,255,255,0.1)'] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <Heart className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-300 text-xs font-medium">Saving Lives with AI</span>
+              <Heart className="w-4 h-4 text-emerald-400" />
+              <span className="text-emerald-100 text-sm font-medium">Saving Lives with AI</span>
             </motion.div>
 
             {/* Auth State UI */}
@@ -98,7 +98,7 @@ export default function Navbar({ onNavigate, currentPage }) {
                 <div className="relative group">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#0A140F]/40 border border-emerald-500/20 cursor-pointer"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md bg-white/5 border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.1)] cursor-pointer"
                   >
                     {user?.photoURL ? (
                       <img src={user.photoURL} alt="Profile" className="w-6 h-6 rounded-full border border-emerald-400/30" />
@@ -107,19 +107,19 @@ export default function Navbar({ onNavigate, currentPage }) {
                         {user?.displayName?.charAt(0) || user?.email?.charAt(0) || 'U'}
                       </div>
                     )}
-                    <span className="text-emerald-100/80 text-xs font-medium max-w-[80px] truncate">
+                    <span className="text-emerald-100 text-sm font-medium max-w-[80px] truncate">
                       {user?.displayName?.split(' ')[0] || 'User'}
                     </span>
                   </motion.button>
                   
                   {/* Dropdown */}
                   <div className="absolute right-0 top-full mt-2 w-36 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 origin-top-right z-50">
-                    <div className="glass-dark border border-emerald-500/20 rounded-xl py-1 shadow-xl">
+                    <div className="backdrop-blur-xl bg-slate-900/90 border border-white/10 rounded-2xl py-1 shadow-xl">
                       <button 
                         onClick={() => {
                           import('../../features/auth/authSlice').then(m => dispatch(m.logoutUser()));
                         }}
-                        className="w-full text-left px-4 py-2 text-xs font-medium text-red-400 hover:bg-white/5 cursor-pointer bg-transparent border-none"
+                        className="w-full text-left px-4 py-2 text-sm font-medium text-red-400 hover:bg-white/5 cursor-pointer bg-transparent border-none"
                       >
                         Sign Out
                       </button>
@@ -130,7 +130,7 @@ export default function Navbar({ onNavigate, currentPage }) {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   onClick={() => onNavigate?.('login')}
-                  className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-xs font-bold shadow-lg shadow-emerald-500/20 cursor-pointer border-none"
+                  className="px-5 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-bold shadow-lg shadow-emerald-500/25 cursor-pointer border-none transition-colors"
                 >
                   Log In
                 </motion.button>
@@ -139,7 +139,7 @@ export default function Navbar({ onNavigate, currentPage }) {
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden text-white p-2 rounded-lg hover:bg-[#0A140F]/10 transition-colors"
+              className="md:hidden text-white p-2 rounded-full backdrop-blur-md bg-white/5 border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:bg-white/10 transition-colors"
             >
               {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -152,12 +152,12 @@ export default function Navbar({ onNavigate, currentPage }) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden glass-dark rounded-xl mt-2 p-4 max-w-7xl mx-auto"
+            className="md:hidden rounded-2xl mt-2 p-4 max-w-7xl mx-auto border border-white/10 bg-slate-900/90 shadow-xl backdrop-blur-xl"
           >
             <div className="flex flex-col gap-2">
               <MobileLink onClick={() => handleNavClick('home')}>Home</MobileLink>
               <MobileLink onClick={() => handleNavClick('about')}>About</MobileLink>
-              <div className="h-px bg-emerald-500/10 my-1" />
+              <div className="h-px bg-white/10 my-1" />
               {isAuthenticated ? (
                 <>
                   <div className="flex items-center gap-2 px-3 py-2">
@@ -168,7 +168,7 @@ export default function Navbar({ onNavigate, currentPage }) {
                         {user?.displayName?.charAt(0) || 'U'}
                       </div>
                     )}
-                    <span className="text-emerald-100/80 text-sm font-medium">{user?.displayName?.split(' ')[0] || 'User'}</span>
+                    <span className="text-slate-200 text-sm font-medium">{user?.displayName?.split(' ')[0] || 'User'}</span>
                   </div>
                   <MobileLink onClick={() => { dispatch(logoutUser()); setMenuOpen(false); }}>Sign Out</MobileLink>
                 </>
@@ -188,10 +188,10 @@ function NavLink({ children, active, onClick }) {
     <motion.button
       whileHover={{ y: -1 }}
       onClick={onClick}
-      className={`text-sm font-medium cursor-pointer transition-colors bg-transparent border-none ${
-        active
-          ? 'text-emerald-400'
-          : 'text-emerald-200/70 hover:text-white'
+      className={`text-sm font-medium cursor-pointer transition-all border-none rounded-full px-5 py-2 ${
+        active 
+          ? 'bg-emerald-500/20 text-emerald-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]' 
+          : 'bg-transparent text-slate-300 hover:text-white hover:bg-white/5'
       }`}
     >
       {children}
@@ -203,7 +203,7 @@ function MobileLink({ children, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="text-left text-emerald-200/80 hover:text-white px-3 py-2 rounded-lg hover:bg-[#0A140F]/5 transition-all text-sm font-medium"
+      className="text-left text-slate-300 hover:text-white px-3 py-2 rounded-xl hover:bg-white/5 transition-all text-sm font-medium border-none bg-transparent"
     >
       {children}
     </button>

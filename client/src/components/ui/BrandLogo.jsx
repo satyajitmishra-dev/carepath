@@ -35,11 +35,9 @@ export default function BrandLogo({
       <motion.div
         whileHover={{ rotate: -4, scale: 1.04 }}
         transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-        className={`relative ${sizeMap[size]} shrink-0 rounded-2xl overflow-hidden ${
-          isDark ? 'shadow-[0_0_24px_rgba(80,200,120,0.18)]' : 'shadow-lg shadow-emerald-500/10'
-        }`}
+        className={`relative ${sizeMap[size]} shrink-0 flex items-center justify-center`}
       >
-        <img src="/logo.png" alt="CarePath logo" className="w-full h-full object-cover scale-110" />
+        <img src="/logo.png" alt="CarePath logo" className="w-full h-full object-contain scale-110 drop-shadow-md" />
       </motion.div>
 
       {showWordmark && (

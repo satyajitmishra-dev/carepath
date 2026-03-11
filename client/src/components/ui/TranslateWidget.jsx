@@ -44,15 +44,15 @@ export default function TranslateWidget() {
       
       <motion.div
         whileHover={{ scale: 1.05 }}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0A140F]/5 border border-white/10 hover:bg-[#0A140F]/10 transition-colors cursor-pointer text-emerald-100"
+        className="flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer text-slate-100 shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
       >
         <Globe className="w-4 h-4" />
-        <span className="text-xs font-medium hidden sm:inline">Translate</span>
+        <span className="text-sm font-medium hidden sm:inline">Translate</span>
       </motion.div>
 
       {/* The actual translate dropdown (hidden until hovered/clicked) */}
-      <div className="absolute right-0 top-full mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 p-2 rounded-xl glass-dark shadow-xl min-w-[150px]">
-        <div className="text-xs text-emerald-200/60 mb-2 font-medium px-1">Select Language:</div>
+      <div className="absolute right-0 top-full mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 p-2 rounded-2xl backdrop-blur-xl bg-slate-900/90 border border-white/10 shadow-xl min-w-[150px]">
+        <div className="text-xs text-slate-400 mb-2 font-medium px-1">Select Language:</div>
         <div id="google_translate_element" className="translate-container" />
       </div>
     </div>
