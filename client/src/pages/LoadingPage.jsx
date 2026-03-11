@@ -31,11 +31,11 @@ export default function LoadingPage() {
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           >
             <motion.div
-              className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center shadow-xl"
+              className="w-24 h-24 flex items-center justify-center"
               animate={{ scale: [1, 1.08, 1] }}
               transition={{ duration: 1, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <Activity className="w-10 h-10 text-white" />
+              <img src="/logo.svg" alt="CarePath Logo" className="w-24 h-24 object-contain drop-shadow-2xl opacity-90" />
             </motion.div>
           </motion.div>
         </motion.div>
@@ -62,11 +62,11 @@ export default function LoadingPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <h2 className="text-2xl font-bold text-evergreen mb-2">
+          <h2 className="text-2xl font-bold text-[#E8F8F2] mb-2">
             Analyzing Your Symptoms
           </h2>
           <motion.p
-            className="text-gray-500 text-sm"
+            className="text-emerald-100/50 text-sm"
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
@@ -103,7 +103,7 @@ export default function LoadingPage() {
                   transition={{ delay: delay + 0.5, duration: 1.5, repeat: Infinity }}
                 />
               </motion.div>
-              <span className="text-sm text-gray-600 font-medium">{text}</span>
+              <span className="text-sm text-emerald-100/70 font-medium">{text}</span>
             </motion.div>
           ))}
         </div>

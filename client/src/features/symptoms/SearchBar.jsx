@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Sparkles, AlertCircle, ArrowRight } from 'lucide-react';
 import { setSymptomText, addChip, removeChip, setChips, setError } from './symptomsSlice';
 import { analyzeSymptoms } from '../analysis/analysisSlice';
+import { incrementGuestConsultation } from '../auth/authSlice';
 import { validateSymptomInput, parseSymptoms } from '../../utils/haversine';
 import { useGeolocation } from '../../hooks/useGeolocation';
 import VoiceInput from '../../components/ui/VoiceInput';
@@ -82,8 +83,15 @@ export default function SearchBar() {
 
     try {
       await dispatch(analyzeSymptoms(currentText)).unwrap();
+      dispatch(setSymptomText('')); // Clear input after successful analysis
+      dispatch(setChips([])); // Clear chips after successful analysis
+      dispatch(setError(null)); // Clear any previous errors
     } catch (err) {
-      toast.error(err || 'Failed to connect to the analysis engine');
+      const errorMessage = err?.message || 'AI Analysis failed. Please try again or check your connection.';
+      dispatch(setError(errorMessage));
+      toast.error(errorMessage, {
+        style: { background: '#0A140F', color: '#E8F8F2', border: '1px solid rgba(239, 68, 68, 0.4)' }
+      });
     } finally {
       submitLockRef.current = false;
     }
@@ -125,7 +133,7 @@ export default function SearchBar() {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0, opacity: 0 }}
                   transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                  className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-teal border border-emerald-200/60"
+                  className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-emerald-900/40 text-emerald-300 border border-emerald-500/30/60"
                 >
                   {chip}
                   <button
@@ -142,7 +150,7 @@ export default function SearchBar() {
 
         {/* Input row */}
         <div className="flex items-center gap-2 px-2">
-          <Search className={`w-5 h-5 shrink-0 transition-colors ${isFocused ? 'text-emerald' : 'text-gray-400'}`} />
+          <Search className={'w-5 h-5 shrink-0 transition-colors ' + (isFocused ? 'text-emerald' : 'text-emerald-100/40')} />
           <input
             ref={inputRef}
             type="text"
@@ -153,12 +161,12 @@ export default function SearchBar() {
             onBlur={() => setIsFocused(false)}
             placeholder="Describe your symptoms... e.g. headache, fever, chest pain"
             disabled={isLoading}
-            className="flex-1 bg-transparent outline-none text-evergreen placeholder:text-gray-400 text-base py-2.5 font-medium disabled:opacity-50"
+            className="flex-1 bg-transparent outline-none text-[#E8F8F2] placeholder:text-emerald-100/40 text-base py-2.5 font-medium disabled:opacity-50"
             id="symptom-input"
           />
 
           {/* Character counter */}
-          <span className={`text-[11px] font-mono tabular-nums shrink-0 ${charCount > 450 ? 'text-amber-500' : 'text-gray-400'}`}>
+          <span className={'text-[11px] font-mono tabular-nums shrink-0 ' + (charCount > 450 ? 'text-amber-500' : 'text-emerald-100/40')}>
             {charCount}/500
           </span>
 
@@ -208,7 +216,7 @@ export default function SearchBar() {
 
       {/* Example symptoms */}
       <div className="mt-5">
-        <p className="text-xs text-gray-500 font-medium mb-2 px-1">💡 Try an example:</p>
+        <p className="text-xs text-emerald-100/50 font-medium mb-2 px-1">💡 Try an example:</p>
         <div className="flex flex-wrap gap-2">
           {EXAMPLE_SYMPTOMS.map((example) => (
             <motion.button
@@ -216,7 +224,7 @@ export default function SearchBar() {
               whileHover={{ scale: 1.04, y: -1 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => handleExampleClick(example)}
-              className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/80 border border-emerald-100 text-teal hover:bg-emerald-50 hover:border-emerald-300 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+              className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#0A140F]/80 border border-emerald-500/20 text-emerald-300 hover:bg-emerald-900/40 hover:border-emerald-300 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
             >
               {example}
             </motion.button>

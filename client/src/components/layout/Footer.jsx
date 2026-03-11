@@ -9,9 +9,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
             {/* Brand */}
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
-                <Activity className="w-4 h-4 text-white" />
-              </div>
+              <img src="/logo.svg" alt="CarePath Logo" className="w-10 h-10 object-contain drop-shadow-md" />
               <div>
                 <span className="text-white font-bold text-sm">
                   Care<span className="text-emerald-400">Path</span>
@@ -49,7 +47,7 @@ function FooterIcon({ icon: Icon }) {
     <motion.div
       whileHover={{ scale: 1.15, y: -2 }}
       whileTap={{ scale: 0.95 }}
-      className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center cursor-pointer hover:bg-emerald-500/10 transition-colors border border-white/5"
+      className="w-8 h-8 rounded-lg bg-[#0A140F]/5 flex items-center justify-center cursor-pointer hover:bg-emerald-500/10 transition-colors border border-white/5"
     >
       <Icon className="w-3.5 h-3.5 text-emerald-300/60" />
     </motion.div>

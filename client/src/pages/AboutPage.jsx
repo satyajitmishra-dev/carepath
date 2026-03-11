@@ -17,9 +17,9 @@ const TECH_STACK = [
   { name: 'Tailwind CSS', category: 'Styling', color: 'bg-cyan-50 text-cyan-700 border-cyan-200' },
   { name: 'Redux Toolkit', category: 'State', color: 'bg-purple-50 text-purple-700 border-purple-200' },
   { name: 'Node.js', category: 'Backend', color: 'bg-green-50 text-green-700 border-green-200' },
-  { name: 'Express.js', category: 'API', color: 'bg-gray-50 text-gray-700 border-gray-200' },
+  { name: 'Express.js', category: 'API', color: 'bg-gray-900/40 text-emerald-100/80 border-emerald-500/20' },
   { name: 'Gemini AI', category: 'AI Engine', color: 'bg-amber-50 text-amber-700 border-amber-200' },
-  { name: 'Leaflet.js', category: 'Maps', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+  { name: 'Leaflet.js', category: 'Maps', color: 'bg-emerald-900/40 text-emerald-400 border-emerald-500/30' },
   { name: 'Framer Motion', category: 'Animation', color: 'bg-pink-50 text-pink-700 border-pink-200' },
 ];
 
@@ -55,7 +55,7 @@ export default function AboutPage() {
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           whileHover={{ x: -3 }}
-          className="flex items-center gap-2 text-sm font-medium text-teal hover:text-evergreen transition-colors cursor-pointer bg-transparent border-none mb-8"
+          className="flex items-center gap-2 text-sm font-medium text-emerald-300 hover:text-[#E8F8F2] transition-colors cursor-pointer bg-transparent border-none mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Home
@@ -67,13 +67,14 @@ export default function AboutPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-14"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/60 border border-emerald-200/60 text-xs font-semibold text-teal mb-4">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/60 border border-emerald-500/30/60 text-xs font-semibold text-emerald-300 mb-4">
             XiBit 2K26 Hackathon
           </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-evergreen tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#E8F8F2] tracking-tight flex items-center justify-center gap-4">
             About <span className="gradient-text">CarePath</span>
+            <img src="/logo.svg" alt="CarePath Logo" className="w-12 h-12 object-contain drop-shadow-[0_0_15px_rgba(80,200,120,0.4)]" />
           </h1>
-          <p className="text-gray-500 mt-3 max-w-lg mx-auto">
+          <p className="text-emerald-100/50 mt-3 max-w-lg mx-auto">
             An AI-powered healthcare navigation platform that helps patients find the right specialist — instantly.
           </p>
         </motion.div>
@@ -97,14 +98,14 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="text-2xl font-extrabold text-red-600 font-mono">{value}</div>
-              <p className="text-gray-500 text-xs mt-1">{label}</p>
+              <p className="text-emerald-100/50 text-xs mt-1">{label}</p>
             </motion.div>
           ))}
         </motion.div>
 
         {/* Features grid */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-          <h2 className="text-2xl font-bold text-evergreen mb-6 text-center">What CarePath Does</h2>
+          <h2 className="text-2xl font-bold text-[#E8F8F2] mb-6 text-center">What CarePath Does</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
             {FEATURES.map(({ icon: Icon, title, desc }, i) => (
               <motion.div
@@ -118,8 +119,8 @@ export default function AboutPage() {
                 <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center mb-3 group-hover:shadow-lg group-hover:shadow-emerald-500/20 transition-shadow">
                   <Icon className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="font-bold text-evergreen text-sm mb-1">{title}</h3>
-                <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+                <h3 className="font-bold text-[#E8F8F2] text-sm mb-1">{title}</h3>
+                <p className="text-emerald-100/50 text-xs leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </div>
@@ -127,8 +128,8 @@ export default function AboutPage() {
 
         {/* Tech stack */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-          <h2 className="text-2xl font-bold text-evergreen mb-6 text-center flex items-center justify-center gap-2">
-            <Code className="w-5 h-5 text-teal" />
+          <h2 className="text-2xl font-bold text-[#E8F8F2] mb-6 text-center flex items-center justify-center gap-2">
+            <Code className="w-5 h-5 text-emerald-300" />
             Tech Stack
           </h2>
           <div className="flex flex-wrap justify-center gap-2 mb-14">
@@ -147,8 +148,8 @@ export default function AboutPage() {
 
         {/* Team */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
-          <h2 className="text-2xl font-bold text-evergreen mb-6 text-center flex items-center justify-center gap-2">
-            <Users className="w-5 h-5 text-teal" />
+          <h2 className="text-2xl font-bold text-[#E8F8F2] mb-6 text-center flex items-center justify-center gap-2">
+            <Users className="w-5 h-5 text-emerald-300" />
             Our Team
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
@@ -161,8 +162,8 @@ export default function AboutPage() {
                 <div className="w-12 h-12 rounded-full gradient-primary flex items-center justify-center mx-auto mb-3 shadow-lg shadow-emerald-500/20">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
-                <h4 className="font-bold text-evergreen text-sm">{name}</h4>
-                <p className="text-gray-400 text-[11px] mt-0.5">{role}</p>
+                <h4 className="font-bold text-[#E8F8F2] text-sm">{name}</h4>
+                <p className="text-emerald-100/40 text-[11px] mt-0.5">{role}</p>
               </motion.div>
             ))}
           </div>
@@ -175,8 +176,8 @@ export default function AboutPage() {
           transition={{ delay: 0.5 }}
           className="text-center py-8"
         >
-          <p className="text-gray-400 text-xs">
-            Built with ❤️ at <span className="font-semibold text-teal">Brainware University</span> · XiBit 2K26 Hackathon
+          <p className="text-emerald-100/40 text-xs">
+            Built with ❤️ at <span className="font-semibold text-emerald-300">Brainware University</span> · XiBit 2K26 Hackathon
           </p>
         </motion.div>
       </div>

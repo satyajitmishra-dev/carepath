@@ -80,7 +80,7 @@ export default function ResultsPage() {
               onClick={handleBack}
               whileHover={{ x: -3 }}
               whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-2 text-sm font-medium text-teal hover:text-evergreen transition-colors cursor-pointer bg-transparent border-none"
+              className="flex items-center gap-2 text-sm font-medium text-emerald-300 hover:text-[#E8F8F2] transition-colors cursor-pointer bg-transparent border-none"
             >
               <ArrowLeft className="w-4 h-4" />
               New Search
@@ -92,7 +92,7 @@ export default function ResultsPage() {
               onClick={handleDownloadPDF}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-700 hover:bg-emerald-200 transition-colors cursor-pointer border border-emerald-300/50"
+              className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-400 hover:bg-emerald-200 transition-colors cursor-pointer border border-emerald-300/50"
             >
               <DownloadCloud className="w-4 h-4" />
               Save as PDF
@@ -101,11 +101,11 @@ export default function ResultsPage() {
 
           {symptomChips.length > 0 && (
             <div className="flex items-center gap-2 flex-wrap">
-              <Tag className="w-3.5 h-3.5 text-gray-400" />
+              <Tag className="w-3.5 h-3.5 text-emerald-100/40" />
               {symptomChips.map((chip) => (
                 <span
                   key={chip}
-                  className="px-2.5 py-1 rounded-full text-[11px] font-medium bg-white/80 border border-emerald-100 text-teal"
+                  className="px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#0A140F]/80 border border-emerald-500/20 text-emerald-300"
                 >
                   {chip}
                 </span>
@@ -136,8 +136,8 @@ export default function ResultsPage() {
           {/* Map section */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-teal" />
-              <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+              <MapPin className="w-4 h-4 text-emerald-300" />
+              <h3 className="text-sm font-semibold text-emerald-100/50 uppercase tracking-wider">
                 Nearby {result.specialistType}s
               </h3>
             </div>

@@ -38,7 +38,7 @@ export default function Testimonials() {
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/60 text-xs font-semibold text-amber-700 mb-4">
             ⭐ What Users Say
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-evergreen tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#E8F8F2] tracking-tight">
             Trusted by <span className="gradient-text">Real People</span>
           </h2>
         </motion.div>
@@ -65,7 +65,7 @@ export default function Testimonials() {
               </div>
 
               {/* Text */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 relative z-10">
+              <p className="text-emerald-100/70 text-sm leading-relaxed mb-4 relative z-10">
                 {text}
               </p>
 
@@ -73,8 +73,8 @@ export default function Testimonials() {
               <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
                 <span className="text-2xl">{avatar}</span>
                 <div>
-                  <p className="font-bold text-evergreen text-sm">{name}</p>
-                  <p className="text-gray-400 text-[11px]">{location}</p>
+                  <p className="font-bold text-[#E8F8F2] text-sm">{name}</p>
+                  <p className="text-emerald-100/40 text-[11px]">{location}</p>
                 </div>
               </div>
             </motion.div>

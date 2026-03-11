@@ -17,7 +17,7 @@ export default function JudgeScorePanel() {
         transition={{ delay: 0.95 }}
         className="glass-card p-6"
       >
-        <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4">Judge Rubric Alignment</p>
+        <p className="text-xs font-semibold text-emerald-100/50 uppercase tracking-widest mb-4">Judge Rubric Alignment</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {SCORE_ROWS.map(({ label, score, icon: Icon }, index) => (
             <motion.div
@@ -25,14 +25,14 @@ export default function JudgeScorePanel() {
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1 + index * 0.07 }}
-              className="rounded-xl border border-emerald-100 bg-white/85 p-3"
+              className="rounded-xl border border-emerald-500/20 bg-[#0A140F]/85 p-3"
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                  <Icon className="w-4 h-4 text-teal" />
-                  <span className="text-sm font-semibold text-evergreen">{label}</span>
+                  <Icon className="w-4 h-4 text-emerald-300" />
+                  <span className="text-sm font-semibold text-[#E8F8F2]">{label}</span>
                 </div>
-                <span className="text-sm font-extrabold text-teal">{score}%</span>
+                <span className="text-sm font-extrabold text-emerald-300">{score}%</span>
               </div>
               <div className="w-full h-2 rounded-full bg-emerald-100 overflow-hidden">
                 <motion.div

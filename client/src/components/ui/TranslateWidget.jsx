@@ -44,7 +44,7 @@ export default function TranslateWidget() {
       
       <motion.div
         whileHover={{ scale: 1.05 }}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer text-emerald-100"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0A140F]/5 border border-white/10 hover:bg-[#0A140F]/10 transition-colors cursor-pointer text-emerald-100"
       >
         <Globe className="w-4 h-4" />
         <span className="text-xs font-medium hidden sm:inline">Translate</span>

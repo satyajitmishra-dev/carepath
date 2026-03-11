@@ -31,9 +31,9 @@ export default function ExperienceShowcase() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
           <div>
             <p className="text-xs font-semibold text-emerald uppercase tracking-widest">Product Experience</p>
-            <h3 className="text-2xl font-extrabold text-evergreen tracking-tight">Designed for confidence in critical moments</h3>
+            <h3 className="text-2xl font-extrabold text-[#E8F8F2] tracking-tight">Designed for confidence in critical moments</h3>
           </div>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-teal text-xs font-semibold w-fit">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-900/40 border border-emerald-500/30 text-emerald-300 text-xs font-semibold w-fit">
             <Sparkles className="w-3.5 h-3.5" />
             Judge-ready interaction quality
           </div>
@@ -47,13 +47,13 @@ export default function ExperienceShowcase() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.85 + index * 0.08 }}
               whileHover={{ y: -3 }}
-              className="rounded-2xl border border-emerald-100 bg-white/80 p-4"
+              className="rounded-2xl border border-emerald-500/20 bg-[#0A140F]/80 p-4"
             >
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center mb-3">
-                <Icon className="w-5 h-5 text-teal" />
+              <div className="w-10 h-10 rounded-xl bg-emerald-900/40 flex items-center justify-center mb-3">
+                <Icon className="w-5 h-5 text-emerald-300" />
               </div>
-              <h4 className="text-sm font-bold text-evergreen">{title}</h4>
-              <p className="text-xs text-gray-500 mt-2 leading-relaxed">{description}</p>
+              <h4 className="text-sm font-bold text-[#E8F8F2]">{title}</h4>
+              <p className="text-xs text-emerald-100/50 mt-2 leading-relaxed">{description}</p>
             </motion.div>
           ))}
         </div>

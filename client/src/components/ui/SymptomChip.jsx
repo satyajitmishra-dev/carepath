@@ -9,7 +9,7 @@ export default function SymptomChip({ label, onRemove }) {
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0, opacity: 0 }}
       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-50 text-teal border border-emerald-200/60 shadow-sm"
+      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-900/40 text-emerald-300 border border-emerald-500/30/60 shadow-sm"
     >
       {label}
       {onRemove && (

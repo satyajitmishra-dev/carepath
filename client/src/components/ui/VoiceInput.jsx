@@ -66,7 +66,7 @@ export default function VoiceInput() {
       className={`relative w-9 h-9 rounded-xl flex items-center justify-center transition-all cursor-pointer border-none ${
         isListening
           ? 'bg-red-500 text-white shadow-lg shadow-red-500/30'
-          : 'bg-emerald-50 text-teal hover:bg-emerald-100'
+          : 'bg-emerald-900/40 text-emerald-300 hover:bg-emerald-100'
       }`}
       title={isListening ? 'Stop listening' : 'Speak your symptoms'}
     >

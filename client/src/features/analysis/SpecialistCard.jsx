@@ -9,7 +9,7 @@ export default function SpecialistCard({ specialistType, searchQuery }) {
       transition={{ delay: 0.4, type: 'spring', stiffness: 200 }}
       className="relative overflow-hidden"
     >
-      <div className="glass-card p-6 relative group card-hover border-2 border-emerald-200/40">
+      <div className="glass-card p-6 relative group card-hover border-2 border-emerald-500/30/40">
         {/* Glow background */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-teal-50/30" />
@@ -39,20 +39,20 @@ export default function SpecialistCard({ specialistType, searchQuery }) {
                 <p className="text-xs font-semibold text-emerald uppercase tracking-widest mb-1">
                   Recommended Specialist
                 </p>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-evergreen tracking-tight">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#E8F8F2] tracking-tight">
                   {specialistType}
                 </h2>
-                <p className="text-gray-500 text-sm mt-1">
+                <p className="text-emerald-100/50 text-sm mt-1">
                   Based on your symptoms, we recommend consulting a {specialistType.toLowerCase()}
                 </p>
               </div>
             </div>
 
             <motion.div
-              className="hidden sm:flex w-12 h-12 rounded-xl bg-emerald-50 items-center justify-center shrink-0"
+              className="hidden sm:flex w-12 h-12 rounded-xl bg-emerald-900/40 items-center justify-center shrink-0"
               whileHover={{ scale: 1.1, backgroundColor: 'rgba(80,200,120,0.15)' }}
             >
-              <ArrowRight className="w-5 h-5 text-teal" />
+              <ArrowRight className="w-5 h-5 text-emerald-300" />
             </motion.div>
           </div>
         </div>

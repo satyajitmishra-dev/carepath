@@ -47,7 +47,7 @@ export default function UrgencyBadge({ level, reason }) {
         <motion.div
           animate={level === 'Emergency' ? { scale: [1, 1.2, 1] } : {}}
           transition={{ duration: 1, repeat: Infinity }}
-          className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center shrink-0 backdrop-blur-sm"
+          className="w-14 h-14 rounded-2xl bg-[#0A140F]/20 flex items-center justify-center shrink-0 backdrop-blur-sm"
         >
           <IconComp className="w-7 h-7 text-white" />
         </motion.div>
@@ -56,7 +56,7 @@ export default function UrgencyBadge({ level, reason }) {
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight">{config.text}</h2>
           <p className="text-white/80 text-sm mt-1">{config.subtext}</p>
           {reason && (
-            <p className="text-white/70 text-xs mt-2 bg-white/10 rounded-lg px-3 py-1.5 inline-block backdrop-blur-sm">
+            <p className="text-white/70 text-xs mt-2 bg-[#0A140F]/10 rounded-lg px-3 py-1.5 inline-block backdrop-blur-sm">
               {reason}
             </p>
           )}
@@ -67,7 +67,7 @@ export default function UrgencyBadge({ level, reason }) {
             href="tel:108"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2 bg-white text-red-600 px-4 py-2.5 rounded-xl font-bold text-sm shrink-0 shadow-lg no-underline"
+            className="flex items-center gap-2 bg-[#0A140F] text-red-600 px-4 py-2.5 rounded-xl font-bold text-sm shrink-0 shadow-lg no-underline"
           >
             <Phone className="w-4 h-4" />
             Call 108

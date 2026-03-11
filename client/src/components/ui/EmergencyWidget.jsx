@@ -27,11 +27,11 @@ export default function EmergencyWidget() {
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2">
                 <Siren className="w-4 h-4 text-red-500" />
-                <h4 className="font-bold text-sm text-evergreen">Emergency Helplines</h4>
+                <h4 className="font-bold text-sm text-[#E8F8F2]">Emergency Helplines</h4>
               </div>
               <button
                 onClick={() => setIsExpanded(false)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-emerald-100/40 hover:text-emerald-100/70 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -44,7 +44,7 @@ export default function EmergencyWidget() {
               <EmergencyLink number="1800-599-0019" label="Health Helpline (Toll Free)" />
             </div>
 
-            <p className="text-[10px] text-gray-400 mt-3 leading-relaxed">
+            <p className="text-[10px] text-emerald-100/40 mt-3 leading-relaxed">
               If you or someone nearby is experiencing a medical emergency, please call immediately.
             </p>
           </motion.div>

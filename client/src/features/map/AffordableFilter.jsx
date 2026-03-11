@@ -17,14 +17,14 @@ export default function AffordableFilter() {
       className="glass-card p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
     >
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-xl bg-emerald-50 flex items-center justify-center">
-          <Filter className="w-4 h-4 text-teal" />
+        <div className="w-9 h-9 rounded-xl bg-emerald-900/40 flex items-center justify-center">
+          <Filter className="w-4 h-4 text-emerald-300" />
         </div>
         <div>
-          <p className="text-sm font-semibold text-evergreen">
+          <p className="text-sm font-semibold text-[#E8F8F2]">
             Show affordable clinics only
           </p>
-          <p className="text-[11px] text-gray-400 flex items-center gap-1">
+          <p className="text-[11px] text-emerald-100/40 flex items-center gap-1">
             <IndianRupee className="w-3 h-3" />
             Under ₹500 consultation fee · {affordableCount} available
           </p>
@@ -54,7 +54,7 @@ export default function AffordableFilter() {
           }`}
         >
           <motion.div
-            className="absolute top-0.5 w-6 h-6 rounded-full bg-white shadow-md"
+            className="absolute top-0.5 w-6 h-6 rounded-full bg-[#0A140F] shadow-md"
             animate={{ left: affordableOnly ? '30px' : '2px' }}
             transition={{ type: 'spring', stiffness: 500, damping: 30 }}
           />

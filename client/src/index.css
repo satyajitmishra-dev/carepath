@@ -33,10 +33,10 @@
     --n: 155 90% 10%;
     --nf: 155 85% 7%;
     --nc: 152 40% 95%;
-    --b1: 160 30% 97%;
-    --b2: 155 35% 93%;
-    --b3: 150 30% 88%;
-    --bc: 155 90% 10%;
+    --b1: 160 30% 5%;
+    --b2: 155 35% 8%;
+    --b3: 150 30% 11%;
+    --bc: 155 40% 95%;
     --in: 198 93% 60%;
     --su: 148 59% 38%;
     --wa: 43 96% 56%;
@@ -62,16 +62,16 @@
 
   body {
     font-family: 'Inter', sans-serif;
-    background: #F4FAF7;
-    color: #013220;
+    background: #050B08;
+    color: #E8F8F2;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background: rgba(80, 200, 120, 0.3);
-    color: #013220;
+    background: rgba(80, 200, 120, 0.4);
+    color: #FFFFFF;
   }
 }
 
@@ -81,7 +81,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #E8F8F2;
+  background: #0A140F;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -91,33 +91,34 @@
 
 /* ── Glassmorphism utilities ── */
 .glass-card {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(15, 25, 20, 0.5);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(80, 200, 120, 0.15);
   border-radius: 1rem;
-  box-shadow: 0 8px 32px rgba(1, 50, 32, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 .glass-dark {
-  background: rgba(1, 50, 32, 0.85);
+  background: rgba(5, 11, 8, 0.85);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(80, 200, 120, 0.2);
+  border: 1px solid rgba(80, 200, 120, 0.1);
 }
 
 .glass-input {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(10, 20, 15, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 2px solid rgba(80, 200, 120, 0.2);
   border-radius: 1rem;
+  color: #E8F8F2;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-input:focus-within {
   border-color: #50C878;
-  box-shadow: 0 0 0 4px rgba(80, 200, 120, 0.15), 0 8px 32px rgba(1, 50, 32, 0.08);
+  box-shadow: 0 0 0 4px rgba(80, 200, 120, 0.15), 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 /* ── Gradient utilities ── */
@@ -127,14 +128,14 @@
 
 .gradient-mesh {
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(80, 200, 120, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(11, 110, 79, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(209, 242, 235, 0.3) 0%, transparent 50%),
-    #F4FAF7;
+    radial-gradient(ellipse at 20% 50%, rgba(80, 200, 120, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(11, 110, 79, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(80, 200, 120, 0.05) 0%, transparent 50%),
+    #050B08;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #0B6E4F 0%, #50C878 50%, #0B6E4F 100%);
+  background: linear-gradient(135deg, #7EDBA0 0%, #50C878 50%, #7EDBA0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

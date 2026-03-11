@@ -12,7 +12,7 @@ export default function ConditionCards({ conditions }) {
 
   return (
     <div>
-      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+      <h3 className="text-sm font-semibold text-emerald-100/50 uppercase tracking-wider mb-3 flex items-center gap-2">
         <AlertCircle className="w-4 h-4" />
         Possible Conditions
       </h3>
@@ -32,7 +32,7 @@ export default function ConditionCards({ conditions }) {
                 <div className={`w-2.5 h-2.5 rounded-full ${color.dot}`} />
                 <span className={`${color.text} font-semibold text-sm`}>{condition}</span>
               </div>
-              <p className="text-gray-400 text-[10px] mt-2 ml-5">Possible — not a diagnosis</p>
+              <p className="text-emerald-100/40 text-[10px] mt-2 ml-5">Possible — not a diagnosis</p>
             </motion.div>
           );
         })}

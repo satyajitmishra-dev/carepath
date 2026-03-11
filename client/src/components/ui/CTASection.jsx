@@ -28,10 +28,10 @@ export default function CTASection() {
             <Sparkles className="w-8 h-8 text-white" />
           </motion.div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-evergreen tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#E8F8F2] tracking-tight mb-4">
             Ready to Find Your <span className="gradient-text">Specialist?</span>
           </h2>
-          <p className="text-gray-500 mb-8 max-w-md mx-auto">
+          <p className="text-emerald-100/50 mb-8 max-w-md mx-auto">
             Stop guessing which doctor to visit. Let AI guide you to the right specialist in under 60 seconds.
           </p>
 
@@ -45,7 +45,7 @@ export default function CTASection() {
             <ArrowRight className="w-5 h-5" />
           </motion.button>
 
-          <div className="flex items-center justify-center gap-6 mt-6 text-gray-400">
+          <div className="flex items-center justify-center gap-6 mt-6 text-emerald-100/40">
             <span className="flex items-center gap-1.5 text-xs">
               <Shield className="w-3 h-3" /> No signup required
             </span>

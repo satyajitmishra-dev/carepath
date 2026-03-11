@@ -8,8 +8,8 @@ const STEPS = [
     title: 'Describe Symptoms',
     description: 'Type your symptoms in plain language — no medical jargon needed. Just say what you feel.',
     color: 'from-emerald-400 to-emerald-600',
-    bgColor: 'bg-emerald-50',
-    borderColor: 'border-emerald-200',
+    bgColor: 'bg-emerald-900/40',
+    borderColor: 'border-emerald-500/30',
   },
   {
     step: '02',
@@ -43,13 +43,13 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/60 border border-emerald-200/60 text-xs font-semibold text-teal mb-4">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/60 border border-emerald-500/30/60 text-xs font-semibold text-emerald-300 mb-4">
             Simple 3-Step Process
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-evergreen tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#E8F8F2] tracking-tight">
             How <span className="gradient-text">CarePath</span> Works
           </h2>
-          <p className="text-gray-500 mt-3 max-w-md mx-auto text-sm">
+          <p className="text-emerald-100/50 mt-3 max-w-md mx-auto text-sm">
             From symptoms to specialist in under 60 seconds — no login, no hassle.
           </p>
         </motion.div>
@@ -88,8 +88,8 @@ export default function HowItWorks() {
                   </motion.div>
                 </div>
 
-                <h3 className="text-lg font-bold text-evergreen mb-2 relative z-10">{title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed relative z-10">{description}</p>
+                <h3 className="text-lg font-bold text-[#E8F8F2] mb-2 relative z-10">{title}</h3>
+                <p className="text-emerald-100/50 text-sm leading-relaxed relative z-10">{description}</p>
 
                 {/* Arrow connector on mobile */}
                 {i < STEPS.length - 1 && (

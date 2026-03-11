@@ -45,7 +45,7 @@ export default function FAQ() {
             <HelpCircle className="w-3 h-3" />
             Common Questions
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-evergreen tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#E8F8F2] tracking-tight">
             Frequently Asked <span className="gradient-text">Questions</span>
           </h2>
         </motion.div>
@@ -61,20 +61,20 @@ export default function FAQ() {
             >
               <div
                 className={`glass-card overflow-hidden transition-all duration-300 ${
-                  openIndex === i ? 'border-emerald-200 shadow-md shadow-emerald-500/5' : ''
+                  openIndex === i ? 'border-emerald-500/30 shadow-md shadow-emerald-500/5' : ''
                 }`}
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   className="w-full flex items-center justify-between p-4 text-left cursor-pointer bg-transparent border-none"
                 >
-                  <span className="font-semibold text-evergreen text-sm pr-4">{q}</span>
+                  <span className="font-semibold text-[#E8F8F2] text-sm pr-4">{q}</span>
                   <motion.div
                     animate={{ rotate: openIndex === i ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
                     className="shrink-0"
                   >
-                    <ChevronDown className="w-4 h-4 text-teal" />
+                    <ChevronDown className="w-4 h-4 text-emerald-300" />
                   </motion.div>
                 </button>
 
@@ -88,7 +88,7 @@ export default function FAQ() {
                     >
                       <div className="px-4 pb-4">
                         <div className="h-px bg-emerald-100 mb-3" />
-                        <p className="text-gray-500 text-sm leading-relaxed">{a}</p>
+                        <p className="text-emerald-100/50 text-sm leading-relaxed">{a}</p>
                       </div>
                     </motion.div>
                   )}

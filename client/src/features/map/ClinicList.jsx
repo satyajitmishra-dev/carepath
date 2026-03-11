@@ -8,8 +8,8 @@ export default function ClinicList() {
   if (filteredClinics.length === 0) {
     return (
       <div className="glass-card p-8 text-center">
-        <p className="text-gray-500 text-sm">No clinics found matching your criteria.</p>
-        <p className="text-gray-400 text-xs mt-1">Try toggling the affordable filter off.</p>
+        <p className="text-emerald-100/50 text-sm">No clinics found matching your criteria.</p>
+        <p className="text-emerald-100/40 text-xs mt-1">Try toggling the affordable filter off.</p>
       </div>
     );
   }
@@ -17,10 +17,10 @@ export default function ClinicList() {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+        <h3 className="text-sm font-semibold text-emerald-100/50 uppercase tracking-wider">
           Nearby Clinics ({filteredClinics.length})
         </h3>
-        <span className="text-[11px] text-gray-400">Sorted by distance</span>
+        <span className="text-[11px] text-emerald-100/40">Sorted by distance</span>
       </div>
 
       {filteredClinics.map((clinic, i) => (

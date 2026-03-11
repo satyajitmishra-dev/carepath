@@ -70,7 +70,7 @@ export default function ClinicMap() {
   const { filteredClinics } = useSelector((state) => state.map);
 
   return (
-    <div className="w-full h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg border border-emerald-100/50">
+    <div className="w-full h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg border border-emerald-500/20/50">
       <MapContainer
         center={[lat, lng]}
         zoom={13}
@@ -90,8 +90,8 @@ export default function ClinicMap() {
         <Marker position={[lat, lng]} icon={userIcon}>
           <Popup>
             <div className="text-center p-1">
-              <p className="font-bold text-sm text-evergreen">📍 Your Location</p>
-              <p className="text-xs text-gray-500 mt-0.5">{lat.toFixed(4)}, {lng.toFixed(4)}</p>
+              <p className="font-bold text-sm text-[#E8F8F2]">📍 Your Location</p>
+              <p className="text-xs text-emerald-100/50 mt-0.5">{lat.toFixed(4)}, {lng.toFixed(4)}</p>
             </div>
           </Popup>
         </Marker>
@@ -105,11 +105,11 @@ export default function ClinicMap() {
           >
             <Popup maxWidth={260}>
               <div className="p-1 min-w-[200px]">
-                <h4 className="font-bold text-sm text-evergreen mb-0.5">{clinic.name}</h4>
-                <p className="text-[11px] text-gray-500 mb-2">{clinic.clinicName}</p>
+                <h4 className="font-bold text-sm text-[#E8F8F2] mb-0.5">{clinic.name}</h4>
+                <p className="text-[11px] text-emerald-100/50 mb-2">{clinic.clinicName}</p>
 
                 <div className="flex flex-wrap gap-1.5 mb-2">
-                  <span className="px-2 py-0.5 bg-emerald-50 text-teal text-[10px] font-semibold rounded-full">
+                  <span className="px-2 py-0.5 bg-emerald-900/40 text-emerald-300 text-[10px] font-semibold rounded-full">
                     {clinic.specialty}
                   </span>
                   <span className="px-2 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-semibold rounded-full">
@@ -121,7 +121,7 @@ export default function ClinicMap() {
                 </div>
 
                 {clinic.distance !== undefined && (
-                  <p className="text-[11px] text-gray-500 mb-2">📏 {clinic.distance} km away</p>
+                  <p className="text-[11px] text-emerald-100/50 mb-2">📏 {clinic.distance} km away</p>
                 )}
 
                 <a
